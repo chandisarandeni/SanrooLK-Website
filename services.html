@@ -1,93 +1,333 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
 
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-    </head>
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <body>
-        <header>
-            <!-- place navbar here -->
-        </header>
-        <main>
-            <section class="services">
-                <div class="container mt-5">
-                    <div class="row">
-                        <!-- Card 1 -->
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="/images/services-1.png" class="card-img-top" alt="Solar Panel">
-                                <div class="card-body text-center">
-                                    <div class="mb-2">
-                                        <img src="icon.png" alt="Icon" width="40">
-                                    </div>
-                                    <h5 class="card-title">Solar Panel Solutions</h5>
-                                    <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
-                                    <a href="#" class="btn btn-link">READ MORE →</a>
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <!--google fonts-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+            <div class="container">
+                <!-- Brand Logo -->
+                <a class="navbar-brand" href="#">
+                    <img src="images/logo.png" alt="Logo">
+                </a>
+
+                <!-- Navbar Toggle Button for Mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar Links -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">News</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    </ul>
+
+                    <!-- Login Button -->
+                    <a href="#" class="btn btn-success me-3">Login</a>
+
+                    <!-- Profile Dropdown -->
+                    <div class="dropdown">
+                        <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown"
+                            data-bs-toggle="dropdown" alt="Profile">
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Profile</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="hero">
+            <div class="container">
+                <h1 class="hero-text">SWITCH TO <br>SOLAR ENERGY.</h1>
+            </div>
+        </div>
+
+        <div class="container features">
+            <div class="row justify-content-center">
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="icon">✔</div>
+                        <h5 class="mt-3">Environmentally Conscious</h5>
+                        <p>Sample text here</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="icon">⚡</div>
+                        <h5 class="mt-3">Simple Setup Process</h5>
+                        <p>Sample text here</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <div class="icon">🛠</div>
+                        <h5 class="mt-3">Minimum Upkeep Required</h5>
+                        <p>Sample text here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="services">
+            <div class="container mt-5">
+                <div class="row">
+                    <!-- Card 1 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="/images/services-1.png" class="card-img-top" alt="Solar Panel">
+                            <div class="card-body text-center">
+                                <div class="mb-2">
+                                    <img src="icon.png" alt="Icon" width="40">
                                 </div>
+                                <h5 class="card-title">Solar Panel Solutions</h5>
+                                <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
+                                <a href="#" class="btn btn-link">READ MORE →</a>
                             </div>
                         </div>
-                
-                        <!-- Card 2 -->
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="images/solar-and-wind-mill.png" class="card-img-top" alt="Solar Panel">
-                                <div class="card-body text-center">
-                                    <div class="mb-2">
-                                        <img src="icon.png" alt="Icon" width="40">
-                                    </div>
-                                    <h5 class="card-title">Solar Panel Solutions</h5>
-                                    <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
-                                    <a href="#" class="btn btn-link">READ MORE →</a>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/solar-and-wind-mill.png" class="card-img-top" alt="Solar Panel">
+                            <div class="card-body text-center">
+                                <div class="mb-2">
+                                    <img src="icon.png" alt="Icon" width="40">
                                 </div>
+                                <h5 class="card-title">Solar Panel Solutions</h5>
+                                <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
+                                <a href="#" class="btn btn-link">READ MORE →</a>
                             </div>
                         </div>
-                
-                        <!-- Card 3 -->
-                        <div class="col-md-4">
-                            <div class="card">
-                                <img src="images/service-3-Cky2oWTe.jpg" class="card-img-top" alt="Solar Panel">
-                                <div class="card-body text-center">
-                                    <div class="mb-2">
-                                        <img src="icon.png" alt="Icon" width="40">
-                                    </div>
-                                    <h5 class="card-title">Solar Panel Solutions</h5>
-                                    <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
-                                    <a href="#" class="btn btn-link">READ MORE →</a>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/service-3-Cky2oWTe.jpg" class="card-img-top" alt="Solar Panel">
+                            <div class="card-body text-center">
+                                <div class="mb-2">
+                                    <img src="icon.png" alt="Icon" width="40">
                                 </div>
+                                <h5 class="card-title">Solar Panel Solutions</h5>
+                                <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
+                                <a href="#" class="btn btn-link">READ MORE →</a>
                             </div>
                         </div>
                     </div>
                 </div>
-            </section>
-        </main>
-        <footer>
-            <!-- place footer here -->
-        </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <script
-            src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"
-        ></script>
+            </div>
+        </section>
+        <section class="services">
+            <div class="container mt-5">
+                <div class="row">
+                    <!-- Card 1 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="/images/services-1.png" class="card-img-top" alt="Solar Panel">
+                            <div class="card-body text-center">
+                                <div class="mb-2">
+                                    <img src="icon.png" alt="Icon" width="40">
+                                </div>
+                                <h5 class="card-title">Solar Panel Solutions</h5>
+                                <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
+                                <a href="#" class="btn btn-link">READ MORE →</a>
+                            </div>
+                        </div>
+                    </div>
 
-        <script
-            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-            integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-            crossorigin="anonymous"
-        ></script>
-    </body>
+                    <!-- Card 2 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/solar-and-wind-mill.png" class="card-img-top" alt="Solar Panel">
+                            <div class="card-body text-center">
+                                <div class="mb-2">
+                                    <img src="icon.png" alt="Icon" width="40">
+                                </div>
+                                <h5 class="card-title">Solar Panel Solutions</h5>
+                                <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
+                                <a href="#" class="btn btn-link">READ MORE →</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="images/service-3-Cky2oWTe.jpg" class="card-img-top" alt="Solar Panel">
+                            <div class="card-body text-center">
+                                <div class="mb-2">
+                                    <img src="icon.png" alt="Icon" width="40">
+                                </div>
+                                <h5 class="card-title">Solar Panel Solutions</h5>
+                                <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
+                                <a href="#" class="btn btn-link">READ MORE →</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Overview Section -->
+        <section class="service-overview">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <h2 class="mb-4">Services Overview</h2>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at sem vel lacus optimist
+                            quasi quod sit amet. Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                        <p>Spori et simple denim sunt sit amet eating and lamenting tristique. Lorem ipsum has been the
+                            industry standard dummy text ever since when.</p>
+                        <p>Et in libris dolor sit per name gravida sicut a light elit vitae and tristique is a case.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Center Section -->
+        <section class="service-center">
+            <div class="container">
+                <h2 class="mb-4">Service Center</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex perferendis enim excepturi consequatur
+                    doloribus amet aut quidem tenetur veritatis aliquid debitis quam non minima accusantium tempora,
+                    earum dolore explicabo maiores?</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A cum ut et pariatur. Eligendi, labore
+                    dolores culpa autem ex optio? Inventore accusantium non laudantium expedita animi esse facere
+                    aperiam reiciendis.</p>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis delectus corporis ut sint eveniet
+                    tempora obcaecati, vel blanditiis nihil voluptas temporibus vitae aliquid fugiat unde perferendis
+                    nam distinctio error aliquam.</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src="images\service-d2-GZjKabx2.jpg" alt="Indoor Planning">
+                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Deserunt esse sint perspiciatis
+                            alias dolores tenetur. Quibusdam eos explicabo praesentium consequatur dignissimos esse nam,
+                            asperiores obcaecati dolorum sapiente quas hic necessitatibus!</p>
+                    </div>
+                    <div class="col-md-6">
+                        <img src="images\service-d1-2n1zqO50.jpg" alt="Outdoor Installation">
+                        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequuntur, beatae. Rerum iure
+                            corrupti placeat quas impedit, aperiam possimus tempora. Reiciendis sequi temporibus autem
+                            necessitatibus qui expedita ea hic fugiat tempora?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="mb-4">Frequently Asked Questions</h2>
+                <p class="mb-5">Lorem ipsum is simply free text used by copytyping refreshing. Neque porro est qui
+                    dolorem ipsum quia quaed inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+                </p>
+
+                <div class="accordion" id="faqAccordion">
+                    <!-- Question 1 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                Question 1
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Answer to question 1 goes here.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Question 2
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Answer to question 2 goes here.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Question 3
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Answer to question 3 goes here.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question 4 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Question 4
+                            </button>
+                        </h2>
+                        <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Answer to question 4 goes here.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
