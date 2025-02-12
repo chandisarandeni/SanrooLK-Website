@@ -1,0 +1,53 @@
+:root{
+    --primary-font: "DM Sans", serif;
+    --green-color: #4AAB3D;
+    --light-white-color: #F8F8F8;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/*index page*/
+.navbar-brand img {
+    height: 40px;
+}
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.hero {
+    position: relative;
+    background: url('images/Reduction-of-Residual-Current-in-Distributed-Solar-Photovoltaic-Systems-e1656131763434\ 1.png') no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: left;
+    padding: 20px;
+}
+.hero-text {
+    font-size: 3rem;
+    font-weight: bold;
+    max-width: 600px;
+}
+.features {
+    margin-top: -50px;
+}
+.card {
+    border: none;
+    text-align: center;
+    background: white;
+}
+.icon {
+    background: #4CAF50;
+    color: white;
+    padding: 10px;
+    display: inline-block;
+    border-radius: 5px;
+}
