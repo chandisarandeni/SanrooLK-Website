@@ -78,6 +78,165 @@
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+.why-choose-us {
+    background-color: #121212; /* Dark background */
+    padding: 50px 0;
+    color: white;
+    overflow: hidden;
+}
+
+.why-text {
+    padding: 40px;
+}
+
+.why-text h2 {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.why-text p {
+    color: #bbb;
+    font-size: 16px;
+}
+
+/* Bullet points */
+.why-list li {
+    list-style: none;
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.why-list li::before {
+    content: "✔";
+    color: #4caf50; /* Green check */
+    margin-right: 10px;
+}
+
+/* Green Video Section */
+.video-section {
+    background-color: #4caf50; /* Green */
+    position: relative;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.video-section .play-btn {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.video-section .play-btn::before {
+    content: "▶";
+    color: white;
+    font-size: 20px;
+    margin-left: 3px;
+}
+
+/* Image */
+.image-container {
+    position: relative;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+}
+.planning {
+    position: relative;
+    background: url('images/planning-bg.png') no-repeat center center/cover;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-content h1 {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+/* Green Button */
+.hero-btn {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero-btn:hover {
+    background-color: #388e3c;
+}
+.project-section {
+    padding: 60px 0;
+}
+.project-title {
+    font-weight: bold;
+    font-size: 2rem;
+}
+.project-text {
+    color: gray;
+    max-width: 400px;
+}
+.testimonial-section {
+    padding: 60px 0;
+}
+.quote-icon {
+    font-size: 2rem;
+    color: green;
+}
+.large-image {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+}
+.small-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+}
+.img-1 { 
+    top: -20px;
+    left: 140px; 
+}
+.img-2 {
+     top: 110px;
+     left: 100px; 
+}
+.img-3 { 
+    bottom: -30px; 
+    left: 140px; 
+}
+
+/* Hide small images on medium and smaller screens */
+@media (max-width: 768px) {
+    .small-image {
+        display: none;
+    }
 
 
 
