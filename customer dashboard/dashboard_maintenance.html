@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/new.css">
 
 </head>
 
@@ -235,12 +236,41 @@
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Maintenance</h1>
 
+
+    <div class="container py-5">
+        <div class="row justify-content-center g-5">
+            <div class="col-md-3">
+                <div class="status-card">
+                    <div class="status-icon">👷‍♂️</div>
+                    <h5 class="mt-2">Ongoing Maintenances</h5>
+                    <div class="status-count">03</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="status-card">
+                    <div class="status-icon">✅</div>
+                    <h5 class="mt-2">Finished Maintenances</h5>
+                    <div class="status-count">03</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="status-card">
+                    <div class="status-icon">⏳</div>
+                    <h5 class="mt-2">Queued Maintenances</h5>
+                    <div class="status-count">03</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Add New Button -->
     <div class="d-flex justify-content-end mb-3">
         <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">
             <i class="fas fa-plus"></i> Add New
         </button>
     </div>
+
+    
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
