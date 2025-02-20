@@ -318,7 +318,14 @@
 @media (max-width: 768px) {
     .small-image {
         display: none;
+
     }
+    .team-card img {
+        width: 100%;
+        height: auto;
+        border-radius: 5px;
+    }
+
 
 
     .card {
