@@ -16,13 +16,139 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="styles.css">
     </head>
 
     <body>
         <header>
-            <!-- place navbar here -->
+            <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+                <div class="container">
+                    <!-- Brand Logo -->
+                    <a class="navbar-brand" href="#">
+                        <img src="images/logo.png" alt="Logo">
+                    </a>
+            
+                    <!-- Navbar Toggle Button for Mobile -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+            
+                    <!-- Navbar Links -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Services</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Shop</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">News</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                        </ul>
+            
+                        <!-- Login Button -->
+                        <a href="#" class="btn btn-success me-3">Login</a>
+            
+                        <!-- Profile Dropdown -->
+                        <div class="dropdown">
+                            <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile">
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </header>
-        <main></main>
+        <main>
+            <section class="contact py-5" style="background: #f3f3f3;">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-md-6">
+                            <h4 style="color: #00C7C4;">Feel Free To Write</h4>
+                            <h1>Send Us An Email</h1>
+                            <form>
+                                <!-- First Row: Name and Email -->
+                                <div class="form-row d-flex flex-row gap-2 my-5">
+                                    <div class="form-group col-6 col-md-6">
+                                        <input type="text" class="form-control" id="inputName" placeholder="Enter Your Name">
+                                    </div>
+                                    <div class="form-group col-6 col-md-6">
+                                        <input type="email" class="form-control" id="inputEmail" placeholder="Enter Email">
+                                    </div>
+                                </div>
+                        
+                                <!-- Second Row: Subject and Phone -->
+                                <div class="form-row d-flex flex-row gap-2 my-5">
+                                    <div class="form-group col-6 col-md-6">
+                                        <input type="text" class="form-control" id="inputSubject" placeholder="Enter Subject">
+                                    </div>
+                                    <div class="form-group col-6 col-md-6">
+                                        <input type="tel" class="form-control" id="inputTel" placeholder="Enter Phone">
+                                    </div>
+                                </div>
+                        
+                                <!-- Message Box -->
+                                <div class="form-group my-5">
+                                    <textarea class="form-control" id="inputMessage" rows="7" placeholder="Enter Message"></textarea>
+                                </div>
+                        
+                                <!-- Submit Button -->
+                                <div class="d-flex gap-3 my-5">
+                                    <button type="submit" class="btn rounded-5 px-3 py-2" style="background-color: #000; color: white">Send Message</button>
+                                    <button type="submit" class="btn rounded-5 px-4 py-2" style="background-color: #EF5C72; color: white">Reset</button>
+                                </div>
+                            </form>
+                        </div>
+                        
+                        <div class="col-lg-6 col-md-6 col-sm-6 ">
+                            <div class="row">
+                                <h3 id="contact-text" style="color: #00C7C4;">Need any help</h3>
+                                <h1 id="contact-text">Get In Touch With Us</h1>
+                                <p id="contact-text">Lorem ipsum dolor sit amet consectur adipiscing elit sed <br> eiusmod tempor incididunt labore dolore magna aliquaenim <br>ad minim. Sed risus augue, commodo ornare felis non, <br>eleifend molestie metus pharetra eleifend.</p>
+                                
+                                <!-- Contact Row 1 -->
+                                <div class="row d-flex align-items-center flex-nowrap gap-3 py-4 p-4">
+                                    <div class="box d-flex justify-content-center align-items-center" style="width: 60px; height: 60px; background: #7054E6;"><i class='bx bxs-phone-call' style="color: white; font-size: 30px;"></i></div>
+                                    <div class="contact-text">
+                                        <h4>Have Any Questions</h4>
+                                        <p>076-8745123</p>
+                                    </div>
+                                </div>
+                        
+                                <!-- Contact Row 2 -->
+                                <div class="row d-flex align-items-center flex-nowrap gap-3 py-4 p-4">
+                                    <div class="box d-flex justify-content-center align-items-center" style="width: 60px; height: 60px; background: #7054E6;"><i class='bx bxs-envelope' style="color: white; font-size: 30px;"></i></div>
+                                    <div class="contact-text">
+                                        <h4>Write Email</h4>
+                                        <p>needhelp@NIBM.com</p>
+                                    </div>
+                                </div>
+                        
+                                <!-- Contact Row 3 -->
+                                <div class="row d-flex align-items-center flex-nowrap gap-3 py-4 p-4">
+                                    <div class="box d-flex justify-content-center align-items-center" style="width: 60px; height: 60px; background: #7054E6;"><i class='bx bx-current-location' style="color: white; font-size: 30px;"></i></div>
+                                    <div class="contact-text">
+                                        <h4>Visit Anytime</h4>
+                                        <p>11a Vidya Mawatha, Colombo 00700</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+            <section class="map">
+                <div class="container-fluid">
+                    <div class="ratio ratio-16x9">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3960.869263168925!2d79.86829127507845!3d6.906232993093126!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae25978fe3ba80d%3A0xca907ea038ba9724!2sNIBM%20World%20Wide!5e0!3m2!1sen!2slk!4v1738760781428!5m2!1sen!2slk" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    
+                </div>
+            </section>
+        </main>
         <footer>
             <!-- place footer here -->
         </footer>
