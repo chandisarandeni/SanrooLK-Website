@@ -350,11 +350,13 @@
         display: none;
 
     }
+    
     .team-card img {
         width: 100%;
         height: auto;
         border-radius: 5px;
     }
+
 
 
 
@@ -522,6 +524,7 @@
     .read-more:hover {
         text-decoration: underline;
     }
+}
 
     .service-section {
         display: flex;
@@ -531,6 +534,7 @@
     }
 
     .footer {
+        margin-top: 5em;
         position: relative;
         color: white;
         padding: 40px 0;
@@ -550,6 +554,9 @@
     .footer-content {
         position: relative;
         z-index: 1;
+    }
+    .footer-content img{
+        width: 150px;
     }
     .footer a {
         color: white;
