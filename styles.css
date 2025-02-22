@@ -220,8 +220,20 @@
 .hero-btn:hover {
     background-color: #388e3c;
 }
+
+/*project-section*/
 .project-section {
     padding: 60px 0;
+}
+.project-section h4{
+    font-size: 25px;
+    color: var(--green-color);
+}
+.project-section h2{
+    font-size: 48px;
+}
+.project-section p{
+    font-size: 20px;
 }
 .project-section img{
     width: 100%;
@@ -234,12 +246,29 @@
     color: gray;
     max-width: 400px;
 }
+
+/*project-section*/
+
+/*testimonial-section*/
 .testimonial-section {
     padding: 60px 0;
 }
+.testimonial-section h3{
+    font-size: 25px;
+    color: var(--green-color);
+}
+.testimonial-section h2{
+    font-size: 48px;
+}
+.testimonial-section span{
+    font-size: 98px;
+}
+.testimonial-section p{
+    font-size: 20px;
+}
 .quote-icon {
     font-size: 2rem;
-    color: green;
+    color: var(--green-color);
 }
 .testimonial-images{
     position: relative;
@@ -323,7 +352,9 @@
     
     }
 }
+/*testimonial-section*/
 
+/*stats-section*/
 .stats-card {
     text-align: center;
     padding: 20px;
@@ -336,7 +367,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 .stats-number {
-    font-size: 24px;
+    font-size: 40px;
     font-weight: bold;
     margin-bottom: 20px;
 }
@@ -344,73 +375,26 @@
     background: #28a745;
     color: white;
     padding: 8px 12px;
-    border-radius: 5px;
     display: inline-block;
     margin-top: 10px;
     font-size: 14px;
     font-weight: 600;
+
 }
-/* Hide small images on medium and smaller screens */
-@media (max-width: 768px) {
-    .small-image {
-        display: none;
+/*stats-section*/
 
-    }
-    
-    .team-card img {
-        width: 100%;
-        height: auto;
-        border-radius: 5px;
-    }
-
-
-
-
-    .card {
-        position: relative;
-        border: none;
-        text-align: center;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        overflow: hidden;
-        padding-top: 50px;
-    }
-    .icon-box {
-        position: absolute;
-        top: -25px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #eaf7e4;
-        padding: 15px;
-        border-radius: 10px;
-    }
-    .icon-box img {
-        width: 30px;
-        height: 30px;
-    }
-
-    .card-title {
-        background-color: #2ebc4f;
-        color: white;
-        padding: 8px;
-        font-weight: bold;
-        margin: 0;
-        display: inline-block;
-        border-radius: 5px;
-    }
-}
-    .card-body {
-        padding-top: 30px;
-    }
+/*team-section*/
     .team-section {
         text-align: center;
         padding: 50px 0;
     }
     .team-section h6 {
-        color: #6c757d;
+        color: var(--green-color);
         font-size: 14px;
         text-transform: uppercase;
         letter-spacing: 1px;
         margin-bottom: 5px;
+        font-size: 25px;
     }
     .team-section h2 {
         font-weight: bold;
@@ -419,12 +403,13 @@
     .team-card {
         position: relative;
         overflow: hidden;
-        border: none;
         text-align: center;
+        max-height: 600px;
+        padding: 15px;
+        margin-bottom: 20px;
     }
     .team-card img {
-        width: 100%;
-        height: auto;
+        width: 70%;
         border-radius: 5px;
     }
     .team-info {
@@ -441,6 +426,9 @@
         letter-spacing: 1px;
     }
 
+/*team-section*/
+
+/*contact-section*/
     .contact-form {
         background-color: #1b1b1b;
         padding: 40px;
@@ -448,9 +436,14 @@
         color: white;
         text-align: left;
     }
+    .contact-form h6{
+        color: var(--green-color);
+        font-size: 25px;
+    }
     .contact-form h3 {
         font-weight: bold;
         margin-bottom: 20px;
+        font-size: 34px;
     }
     .contact-form input,
     .contact-form textarea {
@@ -463,10 +456,14 @@
         color: #bbb;
     }
     .contact-form .btn-green {
-        background-color: #28a745;
+        background-color: var(--green-color);
         color: white;
         font-weight: bold;
         width: 100%;
+    }
+    .faq-section{
+        background: #f8f8f8;
+        border-radius: 15px;
     }
     .faq-section h3 {
         font-weight: bold;
@@ -478,7 +475,7 @@
         border: none;
     }
     .faq-section .accordion-button:not(.collapsed) {
-        background-color: #28a745;
+        background-color: var(--green-color);
         color: white;
     }
     .section-title {
@@ -486,24 +483,30 @@
         margin-bottom: 30px;
     }
     .section-title h6 {
-        color: #28a745;
+        color: var(--green-color);
         font-weight: bold;
     }
 
-    .card {
+/*contact-section*/
+
+/*news-section*/
+    .news-card {
         border: none;
         box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease-in-out;
     }
-    .card:hover {
+    .news-articles h5{
+        color: var(--green-color);
+    }
+    .news-card:hover {
         transform: translateY(-5px);
     }
   
-    .card-body {
+    .news-body {
         text-align: left;
     }
     .date-badge {
-        background-color: #28a745;
+        background-color: var(--green-color);
         color: white;
         padding: 5px 10px;
         font-size: 12px;
@@ -523,13 +526,17 @@
     .read-more {
         font-size: 14px;
         font-weight: bold;
-        color: #28a745;
+        color: var(--green-color);
         text-decoration: none;
     }
     .read-more:hover {
         text-decoration: underline;
     }
 
+/*news-section*/
+    
+
+    /*services-section*/
 
     .service-section {
         display: flex;
@@ -540,10 +547,20 @@
 
     .ready-service img {
         width: 100%;
-        height: auto;
         display: block;
         height: 100%;
     }
+    .ready-service h2{
+        font-size: 40px;
+        color: white;
+    }
+    .ready-service button{
+        background: white;
+        color: var(--green-color);
+        padding: 10px 25px;
+        font-size: 25px;
+    }
+    /*services-section*/
 
     .footer {
         margin-top: 5em;
