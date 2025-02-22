@@ -1,0 +1,45 @@
+/*login section*/
+
+.login-section{
+    background: url(images/login-section-background.jpg);
+    background-position: center;
+    background-size: cover;
+}
+.login-logo{
+    display: flex;
+    justify-content: flex-start;
+}
+.login-logo img{
+    width: 50%;
+    margin-left: -30px;
+}
+.login-form-area {
+    background: rgba(255, 255, 255, 0.2); 
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); 
+    box-shadow: -10px 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 30px;
+}
+.transparent-input {
+    background: rgba(255, 255, 255, 0.1); 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    color: white; /* Text color */
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+    backdrop-filter: blur(10px); 
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Placeholder Styling */
+.transparent-input::placeholder {
+    color: rgba(255, 255, 255, 0.7); 
+}
+
+/* Input focus effect */
+.transparent-input:focus {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
