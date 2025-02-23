@@ -9510,8 +9510,6 @@ a:focus {
 }
 .sidebar #sidebarToggle::after {
   font-weight: 900;
-  content: "\f104";
-  font-family: "Font Awesome 5 Free";
   margin-right: 0.1rem;
 }
 .sidebar #sidebarToggle:hover {
@@ -9525,8 +9523,6 @@ a:focus {
   overflow: hidden;
 }
 .sidebar.toggled #sidebarToggle::after {
-  content: "\f105";
-  font-family: "Font Awesome 5 Free";
   margin-left: 0.25rem;
 }
 .sidebar.toggled .sidebar-card {
