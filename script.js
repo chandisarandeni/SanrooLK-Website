@@ -37,3 +37,10 @@ document.addEventListener("DOMContentLoaded", function () {
         observer.observe(counter);
     });
 });
+
+
+//registration form reset
+
+function resetForm() {
+    document.getElementById("registrationForm").reset();
+}
