@@ -21,7 +21,45 @@
 
     <body>
         <header>
-            <!-- place navbar here -->
+            <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+                <div class="container">
+                    <!-- Brand Logo -->
+                    <a class="navbar-brand" href="#">
+                        <img src="images/logo.png" alt="Logo">
+                    </a>
+            
+                    <!-- Navbar Toggle Button for Mobile -->
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+            
+                    <!-- Navbar Links -->
+                    <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                            <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+                            <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                        </ul>
+            
+                        <!-- Login Button -->
+                        <a href="customerlogin.html" class="btn btn-success me-3">Login</a>
+            
+                        <!-- Profile Dropdown -->
+                        <div class="dropdown">
+                            <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile">
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#">Profile</a></li>
+                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
         </header>
         <main>
             <div class="container mt-5">
@@ -96,52 +134,52 @@
             </div>
         </main>
         <footer>
-            <!-- place footer here -->
-        </footer>
-        <!-- Bootstrap JavaScript Libraries -->
-        <footer class="footer">
-            <div class="container footer-content">
-                <div class="row">
-                    <div class="col-md-4">
-                        <img src="images/SanrooLogo.png" alt="">
-                        <p>Desires to obtain pain of itself, because it is pain, but occasionally circumstances.</p>
-                        <div class="social-icons">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-facebook"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-github"></i></a>
+            <footer class="footer">
+                <div class="container footer-content">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="images/SanrooLogo.png" alt="">
+                            <p>Desires to obtain pain of itself, because it is pain, but occasionally circumstances.</p>
+                            <div class="social-icons">
+                                <a href="#"><i class="fab fa-twitter"></i></a>
+                                <a href="#"><i class="fab fa-facebook"></i></a>
+                                <a href="#"><i class="fab fa-instagram"></i></a>
+                                <a href="#"><i class="fab fa-github"></i></a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
-                        <h5>Explore</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#">About Company</a></li>
-                            <li><a href="#">Meet the Team</a></li>
-                            <li><a href="#">News & Media</a></li>
-                            <li><a href="#">Our Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-3">
-                        <h5>Contact</h5>
-                        <p>No. 634, Dikwela Road, Siyabalape.</p>
-                        <p><a href="mailto:sanrooprices@gmail.com">sanrooprices@gmail.com</a></p>
-                        <p><a href="tel:+94701234567">+94 701234567</a></p>
-                    </div>
-                    <div class="col-md-2">
-                        <h5>Gallery</h5>
-                        <div class="gallery d-flex flex-wrap">
-                            <img src="image1.jpg" alt="Gallery Image">
-                            <img src="image2.jpg" alt="Gallery Image">
-                            <img src="image3.jpg" alt="Gallery Image">
-                            <img src="image4.jpg" alt="Gallery Image">
-                            <img src="image5.jpg" alt="Gallery Image">
-                            <img src="image6.jpg" alt="Gallery Image">
+                        <div class="col-md-3">
+                            <h5>Explore</h5>
+                            <ul class="list-unstyled">
+                                <li><a href="#">About Company</a></li>
+                                <li><a href="#">Meet the Team</a></li>
+                                <li><a href="#">News & Media</a></li>
+                                <li><a href="#">Our Projects</a></li>
+                                <li><a href="#">Contact</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3">
+                            <h5>Contact</h5>
+                            <p>No. 634, Dikwela Road, Siyabalape.</p>
+                            <p><a href="mailto:sanrooprices@gmail.com">sanrooprices@gmail.com</a></p>
+                            <p><a href="tel:+94701234567">+94 701234567</a></p>
+                        </div>
+                        <div class="col-md-2">
+                            <h5>Gallery</h5>
+                            <div class="gallery d-flex flex-wrap">
+                                <img src="image1.jpg" alt="Gallery Image">
+                                <img src="image2.jpg" alt="Gallery Image">
+                                <img src="image3.jpg" alt="Gallery Image">
+                                <img src="image4.jpg" alt="Gallery Image">
+                                <img src="image5.jpg" alt="Gallery Image">
+                                <img src="image6.jpg" alt="Gallery Image">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </footer>
         </footer>
+        <!-- Bootstrap JavaScript Libraries -->
+        
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
