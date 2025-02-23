@@ -33,9 +33,25 @@
 }
 
 /* Placeholder Styling */
-.transparent-input::placeholder {
-    color: rgba(255, 255, 255, 0.7); 
+.transparent-input {
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 8px;
+    outline: none;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
+
+.transparent-input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.transparent-input:focus {
+    background-color: rgba(255, 255, 255, 0.2); 
+    opacity: 0.8;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
 
 /* Input focus effect */
 .transparent-input:focus {
@@ -43,6 +59,7 @@
     border: 1px solid rgba(255, 255, 255, 0.7);
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
+
 .registration{
     background: url(images/register-bg.jpg);
     background-position: center;
@@ -69,9 +86,25 @@
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.form-control {
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 8px;
+    outline: none;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
+}
+
 .form-control::placeholder {
     color: rgba(255, 255, 255, 0.7);
 }
+
+.form-control:focus {
+    background-color: rgba(255, 255, 255, 0.2); 
+    opacity: 0.8;
+    border-color: rgba(255, 255, 255, 0.8);
+}
+
 
 h3 {
     color: white; /* Ensure text is visible */
