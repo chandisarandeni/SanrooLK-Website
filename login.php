@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($user && $user['customerPassword'] === $password) {
         // Successful login
         // Store user data in session
-        $_SESSION['user_id'] = (string)$user['_id']; // Store MongoDB _id or another unique identifier
+        $_SESSION['user_id'] = (string)$user['customerID']; // Store MongoDB _id or another unique identifier
         $_SESSION['user_email'] = $user['customerEmail']; // Store email in session
         $_SESSION['user_name'] = $user['customerName']; // Optionally, store user name or other info
 

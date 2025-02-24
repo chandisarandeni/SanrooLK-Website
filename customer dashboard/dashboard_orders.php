@@ -11,9 +11,11 @@ if (!isset($_SESSION['user_id'])) {
 // Access session data
 $userName = $_SESSION['user_name'];
 $userEmail = $_SESSION['user_email'];
+$userId = $_SESSION['user_id'];
 
-echo "Welcome, $userName! Your email is $userEmail.";
+echo "Welcome, $userName! Your email is $userEmail. id is $userId";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -52,7 +54,7 @@ echo "Welcome, $userName! Your email is $userEmail.";
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -95,7 +97,7 @@ echo "Welcome, $userName! Your email is $userEmail.";
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="dashboard_user.html"
+                <a class="nav-link" href="dashboard_user.php"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class='bx bxs-user' ></i>
                     <span>User</span>

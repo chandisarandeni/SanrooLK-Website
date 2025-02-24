@@ -1,72 +1,73 @@
-<!doctype html>
+<?php
+include 'config.php';
+session_start(); // Start the session
+
+?>
+
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Title</title>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-        />
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-        <!-- Bootstrap CSS v5.2.1 -->
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-            crossorigin="anonymous"
-        />
-        <!--google fonts-->
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
-        <link rel="stylesheet"
-        href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+</head>
 
-        <link rel="stylesheet" href="styles.css">
-    </head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-white shadow-sm">
+            <div class="container">
+                <!-- Brand Logo -->
+                <a class="navbar-brand" href="#">
+                    <img src="images/logo.png" alt="Logo" />
+                </a>
 
-    <body>
-        <header>
-            <nav class="navbar navbar-expand-lg bg-white shadow-sm">
-                <div class="container">
-                    <!-- Brand Logo -->
-                    <a class="navbar-brand" href="#">
-                        <img src="images/logo.png" alt="Logo">
-                    </a>
-            
-                    <!-- Navbar Toggle Button for Mobile -->
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-            
-                    <!-- Navbar Links -->
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                            <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-                            <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-                        </ul>
-            
-                        <!-- Login Button -->
-                        <a href="customerlogin.php" class="btn btn-success me-3">Login</a>
-            
+                <!-- Navbar Toggle Button for Mobile -->
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar Links -->
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+                        <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                    </ul>
+
+                    <!-- Conditionally show Login or Profile based on session -->
+                    <?php if (isset($_SESSION['user_name'])): ?>
                         <!-- Profile Dropdown -->
                         <div class="dropdown">
-                            <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile">
+                            <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile" />
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_orders.php">Orders</a></li>
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_maintenance.html">Maintenance</a></li>
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_user.php">User</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             </ul>
                         </div>
-                    </div>
+                    <?php else: ?>
+                        <!-- Login Button -->
+                        <a href="customerlogin.php" class="btn btn-success me-3">Login</a>
+                    <?php endif; ?>
                 </div>
-            </nav>
+            </div>
+        </nav>
+
 
             <div class="hero">
                 <div class="container">

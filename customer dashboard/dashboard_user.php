@@ -1,3 +1,56 @@
+<?php
+session_start(); // Start the session
+
+// Include the MongoDB connection setup
+include '../config.php';
+
+// Ensure the session is active and the user is logged in
+if (!isset($_SESSION['user_id'])) {
+    echo "You are not logged in."; // Display error directly if not logged in
+    exit(); // Stop execution of the rest of the code
+}
+
+// Access session data
+$userName = $_SESSION['user_name'];
+$userEmail = $_SESSION['user_email'];
+$userId = $_SESSION['user_id'];
+
+echo "Welcome, $userName! Your email is $userEmail. id is $userId";
+
+// Get user ID from session
+
+
+// Use the existing MongoDB connection from config.php // Retrieve the database connection
+
+// Use the 'Customer' collection from the database
+$collection = $database->Customer; // Assuming 'Customer' is the collection name
+
+// Query to retrieve user details based on the logged-in user ID
+$userDetails = $collection->findOne(['customerID' => $userId]);
+
+// Initialize variables to prevent undefined errors
+$customerName = $customerEmail = $customerContact = $customerAddress = 'Not available';
+
+
+if (!empty($userDetails)) {
+    // Fetch user details
+    echo "Data Retrieved Successfully";
+    $customerID = $userDetails['customerID'] ?? 'Not available';
+    $customerName = $userDetails['customerName'] ?? 'Not available';
+    $customerDoB = $userDetails['customerDoB'] ?? 'Not available';
+    $customerNIC = $userDetails['customerNIC'] ?? 'Not available';
+    $customerAddress = $userDetails['customerAddress'] ?? 'Not available';
+    $customerContact = $userDetails['customerContact'] ?? 'Not available';
+    $customerEmail = $userDetails['customerEmail'] ?? 'Not available';
+    $customerGender = $userDetails['customerGender'] ?? 'Not available';
+} else {
+    $message = "No customer details found.";
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,7 +87,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../index.php">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -46,7 +99,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="dashboard_orders.html">
+                <a class="nav-link" href="dashboard_orders.php">
                     <i class='bx bxs-box'></i>
                     <span>Orders</span></a>
             </li>
@@ -125,7 +178,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest'; ?></span>
                                 <img class="img-profile rounded-circle"
                                     src="Images/profile-pic.jpg">
                             </a>
@@ -145,7 +198,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item"  data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -161,21 +214,21 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h6><strong>Full Name</strong></h6>
-                            <p>user</p>
+                            <p><?php echo $customerName; ?></p>
                         </div>
                         <div class="col-md-4">
                             <h6><strong>Email</strong></h6>
-                            <p>User@gmail.com</p>
+                            <p><?php echo $customerEmail; ?></p>
                         </div>
                         <div class="col-md-4">
                             <h6><strong>Mobile</strong></h6>
-                            <p>025897456</p>
+                            <p><?php echo $customerContact; ?>6</p>
                         </div>
                     </div>
                     <div class="row mt-3">
                         <div class="col-md-4">
-                            <h6><strong>Gender</strong></h6>
-                            <p></p>
+                            <h6><strong>Address</strong></h6>
+                            <p><?php echo $customerAddress; ?></p>
                         </div>
                     </div>
                     <div class="row" style="margin-top: 5em;">
@@ -200,20 +253,15 @@
                                 <form>
                                     <div class="mb-3">
                                         <label for="fullName" class="form-label">Full Name</label>
-                                        <input type="text" class="form-control" id="fullName" placeholder="Enter full name">
+                                        <input type="text" class="form-control" id="fullName" placeholder="<?php echo $customerName; ?>">
                                     </div>
                                     <div class="mb-3">
                                         <label for="mobile" class="form-label">Mobile</label>
-                                        <input type="text" class="form-control" id="mobile" placeholder="Enter mobile number">
+                                        <input type="text" class="form-control" id="mobile" placeholder="<?php echo $customerContact; ?>">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="gender" class="form-label">Gender</label>
-                                        <select class="form-control" id="gender">
-                                            <option value="">Select Gender</option>
-                                            <option value="Male">Male</option>
-                                            <option value="Female">Female</option>
-                                            <option value="Other">Other</option>
-                                        </select>
+                                        <label for="mobile" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="mobile" placeholder="<?php echo $customerAddress; ?>">
                                     </div>
                                 </form>
                             </div>
@@ -255,7 +303,7 @@
                             <button type="button" class="btn btn-secondary w-100 pt-3" data-bs-dismiss="modal">Cancel</button>
                         </div>
                         <div class="col-12 col-sm-auto">
-                            <button type="button" class="btn btn-success w-100 pt-3">Save</button>
+                            <button type="button" class="btn btn-success w-100 pt-3 mt-2">Save</button>
                         </div>
                     </div>
                 </div>
@@ -307,7 +355,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="../logout.php">Logout</a>
                 </div>
             </div>
         </div>
