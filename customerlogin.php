@@ -36,7 +36,7 @@
                                     </div>
                                     <div class="col-md-6 col-lg-7 d-flex align-items-center">
                                         <div class="card-body p-4 p-lg-5 text-black">
-                                            <form>
+                                            <form action="login.php" method="POST">
                                                 <div class="d-flex mb-3 pb-1 login-logo align-items-start">
                                                     <span class="h1 fw-bold mb-0">
                                                         <img src="images/SanrooLogo.png" alt="">
@@ -48,11 +48,11 @@
                                                 </h5>
             
                                                 <div class="form-outline mb-4">
-                                                    <input type="email" id="form2Example17" class="form-control form-control-lg transparent-input" placeholder="Email address" required>
+                                                    <input type="email" id="form2Example17" name="email" class="form-control form-control-lg transparent-input" placeholder="Email address" required>
                                                 </div>
                                                 
                                                 <div class="form-outline mb-4">
-                                                    <input type="password" id="form2Example27" class="form-control form-control-lg transparent-input" placeholder="Password" required>
+                                                    <input type="password" id="form2Example27" name="password" class="form-control form-control-lg transparent-input" placeholder="Password" required>
                                                 </div>
             
                                                 <div class="pt-1 mb-4">

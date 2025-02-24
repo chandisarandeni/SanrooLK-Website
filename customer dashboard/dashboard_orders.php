@@ -1,3 +1,19 @@
+<?php
+session_start(); // Start the session
+
+// Check if user is logged in
+if (!isset($_SESSION['user_id'])) {
+    // Redirect to login if not logged in
+    header("Location: login.php");
+    exit();
+}
+
+// Access session data
+$userName = $_SESSION['user_name'];
+$userEmail = $_SESSION['user_email'];
+
+echo "Welcome, $userName! Your email is $userEmail.";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,7 +178,7 @@
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo isset($_SESSION['user_name']) ? $_SESSION['user_name'] : 'Guest'; ?></span>
                                 <img class="img-profile rounded-circle"
                                     src="Images/profile-pic.jpg">
                             </a>

@@ -52,7 +52,7 @@
                         </ul>
             
                         <!-- Login Button -->
-                        <a href="customerlogin.html" class="btn btn-success me-3">Login</a>
+                        <a href="customerlogin.php" class="btn btn-success me-3">Login</a>
             
                         <!-- Profile Dropdown -->
                         <div class="dropdown">
