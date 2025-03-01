@@ -241,7 +241,6 @@ if (!empty($userDetails)) {
                     </div>
                 </div>
 
-
                 <div class="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -250,28 +249,82 @@ if (!empty($userDetails)) {
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form>
+                                <form action="update_user.php" method="POST">
+                                    <!-- Hidden input for customerID -->
+                                    <input type="hidden" id="customerID" name="customerID" value="<?php echo $customerID; ?>">
+
                                     <div class="mb-3">
                                         <label for="fullName" class="form-label">Full Name</label>
-                                        <input type="text" class="form-control" id="fullName" placeholder="<?php echo $customerName; ?>">
+                                        <input type="text" class="form-control" id="fullName" name="customerFullName" value="<?php echo $customerName; ?>" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="mobile" class="form-label">Mobile</label>
-                                        <input type="text" class="form-control" id="mobile" placeholder="<?php echo $customerContact; ?>">
+                                        <input type="text" class="form-control" id="mobile" name="customerContact" value="<?php echo $customerContact; ?>" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="mobile" class="form-label">Address</label>
-                                        <input type="text" class="form-control" id="mobile" placeholder="<?php echo $customerAddress; ?>">
+                                        <label for="address" class="form-label">Address</label>
+                                        <input type="text" class="form-control" id="address" name="customerAddress" value="<?php echo $customerAddress; ?>" required>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="email" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="email" name="customerEmail" value="<?php echo $customerEmail; ?>" require readonly>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-success">Save</button>
                                     </div>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-success">Save</button>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
+                <!-- Change Password Modal -->
+                <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <?php 
+            $userName = $_SESSION['user_name'];
+            $userEmail = $_SESSION['user_email'];
+            $userId = $_SESSION['user_id'];
+            
+            echo "Welcome, $userName! Your email is $userEmail. ID is $userId";
+            ?>
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="update_password.php" method="POST">
+                    <!-- Hidden field to store the customer/user ID -->
+                    <input type="hidden" name="customerID" value="<?php echo $userId; ?>">
+
+                    <div class="mb-3">
+                        <label for="oldPassword" class="form-label">Old Password</label>
+                        <input type="password" class="form-control" name="oldPassword" id="oldPassword" placeholder="Enter old password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">New Password</label>
+                        <input type="password" class="form-control" name="newPassword" id="newPassword" placeholder="Enter new password" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="retypeNewPassword" class="form-label">Retype New Password</label>
+                        <input type="password" class="form-control" name="retypeNewPassword" id="retypeNewPassword" placeholder="Retype new password" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
                 <!-- Change Password Modal -->
     <div class="modal fade" id="changePasswordModal" tabindex="-1" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
