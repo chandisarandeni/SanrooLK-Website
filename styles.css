@@ -676,22 +676,7 @@
 }
 
 /*services-html*/
-.contact-card {
-    background: var(--green-color);
-    color: white;
-    text-align: center;
-    padding: 40px 10px;
-    border-radius: 8px;
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-    width: 250px;
-    position: relative;
-    height: 300px;
-}
 
-.contact-card i {
-    font-size: 100px;
-    margin-bottom: 45px;
-}
 .service-overview p{
     color: #808287;
 }

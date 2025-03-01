@@ -120,3 +120,109 @@ h3 {
     border: none;
 }
 
+/*shop page animations*/
+.product-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Initial shadow */
+    border-radius: 10px; /* Optional: Slight rounded corners */
+    overflow: hidden; /* Ensures no content overflows */
+}
+
+.product-card:hover {
+    transform: scale(1.05); /* Slight zoom-in on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.product-card img {
+    transition: transform 0.3s ease-in-out; /* Smooth zoom transition */
+}
+
+.product-card:hover img {
+    transform: scale(1.1); /* Zoom-in effect for image */
+}
+
+
+
+/*news page animation*/
+/* Styling for the card */
+.services-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.services-card:hover {
+    transform: translateY(-5px) scale(1.02); /* Slight lift */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for the image */
+.service-card-image {
+    transition: transform 0.3s ease-in-out;
+    width: 100%; /* Ensure full width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.services-card:hover .service-card-image {
+    transform: scale(1.1); /* Zoom effect */
+}
+
+/* Styling for the "READ MORE" button */
+.services-card .btn-link {
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+    font-weight: bold;
+}
+
+.services-card .btn-link:hover {
+    color: #f39c12; /* Change color on hover */
+    text-decoration: underline;
+}
+
+/* Contact Card Enhancements */
+.contact-card {
+    background: var(--green-color);
+    color: white;
+    text-align: center;
+    padding: 40px 10px;
+    border-radius: 8px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    width: 250px;
+    position: relative;
+    height: 300px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+/* Hover Effect: Card moves slightly up and glows */
+.contact-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 6px 6px 20px rgba(0, 255, 100, 0.5);
+    background: #27ae60; /* Slightly darker green */
+}
+
+/* Icon Animation (Now Stays White) */
+.contact-card i {
+    font-size: 100px;
+    margin-bottom: 45px;
+    transition: transform 0.3s ease;
+    color: white !important; /* Ensures it stays white */
+}
+
+/* Icon Hover Effect: Small bounce */
+.contact-card:hover i {
+    transform: scale(1.1) rotate(5deg);
+}
+
+/* Text Animation */
+.contact-card h5 {
+    margin: 10px 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Fade-in Text Effect */
+.contact-card:hover h5 {
+    opacity: 0.9;
+    transform: translateY(-3px);
+}
+
+
