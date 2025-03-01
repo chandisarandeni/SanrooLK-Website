@@ -107,6 +107,22 @@ if (!empty($userDetails)) {
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <div class="sidebar-heading">
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="dashboard_maintenance.html"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class='bx bx-task'></i>
+                    <span>inquiry</span>
+                </a>
+            </li>
+
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
             <!-- Heading -->
             <div class="sidebar-heading">
             </div>

@@ -101,7 +101,7 @@
                                 <h5 class="card-title">Filter by Price</h5>    
                                 <input type="range" class="form-range mb-2" min="10" max="10000" value="60"
                                     id="priceRange">
-                                <small>Price: $10 - $<span id="maxPrice">10000</span></small>
+                                <small>Price: $<span id="maxPrice">10000</span></small>
                                 <div class="mt-2">
                                     <button class="btn btn-success btn-sm">Apply</button>
                                     <button class="btn btn-outline-secondary btn-sm">Reset</button>
@@ -216,9 +216,16 @@
                     </div>
                 </div>
                 <!-- End of Product Grid -->
-
+                
             </div>
         </div>
+        <div class="pagination d-flex justify-content-center align-items-center">
+            <button class="btn btn-outline-primary btn-sm" id="prevPage">Previous</button>
+            <span id="pageNumber">Page: 1</span>
+            <button class="btn btn-outline-primary btn-sm" id="nextPage">Next</button>
+        </div>
+       
+        
     </main>
     <footer>
         <!-- place footer here -->
@@ -266,6 +273,8 @@
             </div>
         </footer>
     </footer>
+
+    <script src="script.js"></script>
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

@@ -44,3 +44,23 @@ document.addEventListener("DOMContentLoaded", function () {
 function resetForm() {
     document.getElementById("registrationForm").reset();
 }
+
+//shop slider
+
+
+// Get the slider, max price display, and reset button elements
+const priceRange = document.getElementById('priceRange');
+const maxPrice = document.getElementById('maxPrice');
+const resetButton = document.querySelector('.btn-outline-secondary');
+
+// Update the price display when the slider is moved
+priceRange.addEventListener('input', function() {
+    maxPrice.textContent = priceRange.value;
+});
+
+// Reset the price range and display when the reset button is clicked
+resetButton.addEventListener('click', function() {
+    priceRange.value = 0; // Reset the slider value
+    maxPrice.textContent = priceRange.value; // Update the displayed price
+});
+
