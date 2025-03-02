@@ -1,3 +1,28 @@
+<?php
+require '../config.php'; // Include the config file
+
+session_start();
+// Assuming customer_id is passed via GET or SESSION
+$userName = $_SESSION['user_name'];
+$userEmail = $_SESSION['user_email'];
+$userId = $_SESSION['user_id'];
+
+echo "Welcome, $userName! Your email is $userEmail. id is $userId";
+
+
+
+try {
+    // Select the Maintenance collection
+    $collection = $allCollections['Maintenance']; // Fetching from the associative array in config.php
+
+    // Query for maintenance records matching the customer_id
+    $maintenanceRecords = $collection->find(['customerID' => $userId]);
+
+} catch (Exception $e) {
+    die("Error fetching data: " . $e->getMessage());
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -237,44 +262,30 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
-                    <thead class="thead-dark">
+            <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Maintenance ID</th>
+                        <th>Description</th>
+                        <th>Scheduled Date</th>
+                        <th>Completed Date</th>
+                        <th>Status</th>
+                        <th>Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($maintenanceRecords as $record): ?>
                         <tr>
-                            <th>Maintenance Id</th>
-                            <th>Description</th>
-                            <th>Scheduled Date</th>
-                            <th>Completed Date</th>
-                            <th>Status</th>
-                            <th>Cost</th>
+                            <td><?php echo $record['maintenanceID'] ?? 'N/A'; ?></td>
+                            <td><?php echo $record['maintenenceDescription'] ?? 'N/A'; ?></td>
+                            <td><?php echo $record['scheduledDate'] ?? 'N/A'; ?></td>
+                            <td><?php echo $record['completedDate'] ?? 'Pending'; ?></td>
+                            <td><?php echo $record['maintenenceStatus'] ?? 'N/A'; ?></td>
+                            <td><?php echo isset($record['maintenenceCost']) ? '$' . number_format($record['maintenenceCost'], 2) : 'N/A'; ?></td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Computer Science</td>
-                            <td>Data Structures</td>
-                            <td>85</td>
-                            <td>Not Complete</td>
-                            <td>$500</td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Computer Science</td>
-                            <td>Algorithms</td>
-                            <td>88</td>
-                            <td>Not Complete</td>
-                            <td>$500</td>
-                        </tr>
-                        <tr>
-                            <td>03</td>
-                            <td>Computer Science</td>
-                            <td>Operating Systems</td>
-                            <td>90</td>
-                            <td>Not Complete</td>
-                            <td>$500</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
             </div>
         </div>
     </div>
