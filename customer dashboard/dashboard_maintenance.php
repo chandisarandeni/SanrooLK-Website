@@ -9,7 +9,8 @@ $userId = $_SESSION['user_id'];
 
 echo "Welcome, $userName! Your email is $userEmail. id is $userId";
 
-
+ 
+ 
 
 try {
     // Select the Maintenance collection
@@ -18,9 +19,78 @@ try {
     // Query for maintenance records matching the customer_id
     $maintenanceRecords = $collection->find(['customerID' => $userId]);
 
+    $ongoingCount = $collection->countDocuments([
+        'customerID' => $userId,
+        'maintenenceStatus' => 'Ongoing'
+    ]);
+
+    $finishedCount = $collection->countDocuments([
+        'customerID' => $userId,
+        'maintenenceStatus' => 'Completed'
+    ]);
+
+    $queuedCount = $collection->countDocuments([
+        'customerID' => $userId,
+        'maintenenceStatus' => 'Queued'
+    ]);
+
+    // Find the most recent maintenance record based on the last inserted ID
+ $latestMaintenance = $collection->findOne([], ['sort' => ['maintenanceID' => -1]]);
+
+
+ // Check if we have a valid last maintenance ID
+ if ($latestMaintenance) {
+     $lastMaintenanceId = $latestMaintenance['maintenanceID'];
+     $newId = 'MT' . str_pad((int)substr($lastMaintenanceId, 2) + 1, 4, '0', STR_PAD_LEFT); // Increment the numeric part
+ } else {
+     // If no previous records, start with MT0001
+     $newId = 'MT0001';
+ }
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Fetch the maintenance description from the form input
+    $maintenanceDesc = $_POST['maintenanceDesc'];
+
+    // Assuming you already have the newId logic and it's working
+    $newMaintenanceId = $newId; // Use your existing method to set the new ID
+
+    // Prepare the data to be inserted into the Maintenance collection
+    $maintenanceData = [
+        'maintenanceID' => $newMaintenanceId,
+        'maintenenceDescription' => $maintenanceDesc,
+        'maintenenceStatus' => 'Queued', // Default status for new maintenances
+        'scheduledDate' => null,
+        'completedDate' => null,
+        'maintenenceUpgrades' => null,
+        'maintenenceCost' => null,
+        'technicianID' => null,
+        'maintenanceOfficerID' => null,
+        'customerID' => $userId // Replace with dynamic customerID if needed
+    ];
+
+    // Insert the data into the MongoDB collection
+    try {
+        $collection = $allCollections['Maintenance']; // Fetch the collection
+        $result = $collection->insertOne($maintenanceData);
+
+        // Display the success message and redirect to the maintenance dashboard
+        echo "<script>
+                alert('Maintenance Added Successfully! ID: " . $newMaintenanceId . "');
+                window.location.href = 'http://localhost/project/finalproject/SanrooLK-Website/customer%20dashboard/dashboard_maintenance.php';
+              </script>";
+    } catch (Exception $e) {
+        echo "Error adding maintenance: " . $e->getMessage();
+    }
+}
+
+
+    
+
 } catch (Exception $e) {
     die("Error fetching data: " . $e->getMessage());
 }
+ 
+echo "$newId";
 ?>
 
 <!DOCTYPE html>
@@ -217,30 +287,30 @@ try {
     <div class="container py-5">
         <div class="row justify-content-center g-5">
             <div class="col-md-3">
-                <div class="status-card mt-3">
-                    <div class="status-icon"><span class="material-symbols-outlined">
-                        handyman
-                        </span></div>
-                    <h5 class="mt-2">Ongoing Maintenances</h5>
-                    <div class="status-count">03</div>
-                </div>
+            <div class="status-card mt-3">
+                <div class="status-icon"><span class="material-symbols-outlined">
+                    handyman
+                </span></div>
+                <h5 class="mt-2">Ongoing Maintenances</h5>
+                <div class="status-count"><?php echo $ongoingCount; ?></div>
+            </div>
             </div>
             <div class="col-md-3 mt-3">
                 <div class="status-card">
                     <div class="status-icon"><span class="material-symbols-outlined">
                         check_small
-                        </span></div>
+                    </span></div>
                     <h5 class="mt-2">Finished Maintenances</h5>
-                    <div class="status-count">03</div>
+                    <div class="status-count"><?php echo $finishedCount; ?></div>
                 </div>
             </div>
             <div class="col-md-3 mt-3">
                 <div class="status-card">
                     <div class="status-icon"><span class="material-symbols-outlined">
                         hourglass_bottom
-                        </span></div>
+                    </span></div>
                     <h5 class="mt-2">Queued Maintenances</h5>
-                    <div class="status-count">03</div>
+                    <div class="status-count"><?php echo $queuedCount; ?></div>
                 </div>
             </div>
         </div>
@@ -300,24 +370,26 @@ try {
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form action="" method="POST">
                     <div class="form-group">
                         <label for="maintenanceId">Maintenance ID</label>
-                        <input type="text" class="form-control" id="maintenanceId" placeholder="Enter Maintenance ID">
+                        <input type="text" class="form-control" id="maintenanceId" value="<?php echo $newId; ?>" readonly>
                     </div>
                     <div class="form-group">
                         <label for="maintenanceDesc">Maintenance Description</label>
-                        <input type="text" class="form-control" id="maintenanceDesc" placeholder="Enter Maintenance Description">
+                        <input type="text" class="form-control" id="maintenanceDesc" name="maintenanceDesc" placeholder="Enter Maintenance Description">
                     </div>
+                    <!-- The Add button should be inside the form -->
+                    <button type="submit" class="btn btn-primary">Add</button>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <button type="button" class="btn btn-primary">Add</button>
             </div>
         </div>
     </div>
 </div>
+
 
             <!-- End of Main Content -->
 
