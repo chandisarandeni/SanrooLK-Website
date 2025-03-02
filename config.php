@@ -22,7 +22,7 @@ try {
         $allCollections[$collectionName] = $database->$collectionName; // Assign collection object
     }
 
-    echo "MongoDB connection to Atlas cluster successful!";
+    echo "connection success";
 
 } catch (MongoDB\Exception\AuthenticationException $e) {
     echo "Authentication Error: " . $e->getMessage();

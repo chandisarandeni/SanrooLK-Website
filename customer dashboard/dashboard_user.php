@@ -112,7 +112,7 @@ if (!empty($userDetails)) {
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="dashboard_maintenance.html"
+                <a class="nav-link collapsed" href="dashboard_inquiry.php"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class='bx bx-task'></i>
                     <span>inquiry</span>

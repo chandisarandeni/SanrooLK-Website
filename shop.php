@@ -1,3 +1,15 @@
+<?php
+require 'config.php'; // Include MongoDB connection
+
+try {
+    // Select the 'Product' collection
+    $collection = $database->Product;
+
+    // Fetch all products
+    $products = $collection->find();
+} catch (Exception $e) {
+    die("Error: " . $e->getMessage());
+} ?>
 <!doctype html>
 <html lang="en">
 
@@ -145,78 +157,41 @@
                 </div>
 
                 <!-- Product Grid Section -->
-                <div class="col-lg-9">
-                    <div class="row">
+                <?php
+require 'config.php'; // Include MongoDB connection
 
-                        <!-- Product Items -->
-                        <div class="col-md-4 mb-4">
-                            <div class="card product-card">
-                                <img src="images\monocrystalline-solar-panel-500x500.webp" class="card-img-top" alt="Product">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title">Solar Panel</h6>
-                                    <p class="text-success">$220</p>
-                                    ⭐⭐⭐⭐⭐
-                                </div>
-                            </div>
-                        </div>
+try {
+    // Select the 'Product' collection
+    $collection = $database->Product;
 
-                        <div class="col-md-4 mb-4">
-                            <div class="card product-card">
-                                <img src="images\monocrystalline-solar-panel-500x500.webp" class="card-img-top" alt="Product">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title">Solar Battery</h6>
-                                    <p class="text-success">$150</p>
-                                    ⭐⭐⭐⭐⭐
-                                </div>
-                            </div>
-                        </div>
+    // Fetch all products
+    $products = $collection->find();
+} catch (Exception $e) {
+    die("Error: " . $e->getMessage());
+}
+?>
 
-                        <div class="col-md-4 mb-4">
-                            <div class="card product-card">
-                                <img src="images\monocrystalline-solar-panel-500x500.webp" class="card-img-top" alt="Product">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title">Inverter</h6>
-                                    <p class="text-success">$320</p>
-                                    ⭐⭐⭐⭐⭐
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 mb-4">
-                            <div class="card product-card">
-                                <img src="images\monocrystalline-solar-panel-500x500.webp" class="card-img-top" alt="Product">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title">Wind Turbine</h6>
-                                    <p class="text-success">$540</p>
-                                    ⭐⭐⭐⭐⭐
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 mb-4">
-                            <div class="card product-card">
-                                <img src="images\monocrystalline-solar-panel-500x500.webp" class="card-img-top" alt="Product">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title">Solar Inverter</h6>
-                                    <p class="text-success">$420</p>
-                                    ⭐⭐⭐⭐⭐
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-4 mb-4">
-                            <div class="card product-card">
-                                <img src="images\monocrystalline-solar-panel-500x500.webp" class="card-img-top" alt="Product">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title">Cables & Accessories</h6>
-                                    <p class="text-success">$80</p>
-                                    ⭐⭐⭐⭐⭐
-                                </div>
-                            </div>
-                        </div>
-
+<div class="col-lg-9">
+    <div class="row">
+        <?php foreach ($products as $product): ?>
+            <div class="col-md-4 mb-4">
+                <div class="card product-card">
+                    <img src="<?= htmlspecialchars($product['imageUrl']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['productName']); ?>">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">
+                            <?= htmlspecialchars($product['productName']); ?> 
+                        </h6>
+                        <p>Quantity<span class="text-muted">(<?= htmlspecialchars($product['productQuantity']); ?>)</span></p>
+                        <p class="text-success">$<?= htmlspecialchars($product['productPrice']); ?></p>
+                        ⭐⭐⭐⭐⭐
                     </div>
                 </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+
                 <!-- End of Product Grid -->
                 
             </div>

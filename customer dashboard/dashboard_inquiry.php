@@ -1,3 +1,28 @@
+<?php
+require '../config.php'; // Include the MongoDB config
+
+session_start();
+
+// Check if user is logged in and get their customerId from session
+if (!isset($_SESSION['user_id'])) {
+    echo "User is not logged in.";
+    exit;
+}
+
+$customerId = $_SESSION['user_id']; // Get the logged-in customer ID
+
+// Select the 'inquiry' collection
+$inquiryCollection = $database->Inquiry; 
+
+// Fetch inquiries for the logged-in customer
+$inquiries = $inquiryCollection->find(['customerID' => $customerId]);
+
+// Convert MongoDB cursor to array for easier handling
+$inquiriesArray = iterator_to_array($inquiries);
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -198,7 +223,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
                     <thead class="thead-dark">
                         <tr>
                             <th>Inquiry Id</th>
@@ -210,30 +235,20 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>01</td>
-                            <td>Computer Science</td>
-                            <td>Data Structures</td>
-                            <td>85</td>
-                            <td>Not Complete</td>
-                            <td>$500</td>
-                        </tr>
-                        <tr>
-                            <td>02</td>
-                            <td>Computer Science</td>
-                            <td>Algorithms</td>
-                            <td>88</td>
-                            <td>Not Complete</td>
-                            <td>$500</td>
-                        </tr>
-                        <tr>
-                            <td>03</td>
-                            <td>Computer Science</td>
-                            <td>Operating Systems</td>
-                            <td>90</td>
-                            <td>Not Complete</td>
-                            <td>$500</td>
-                        </tr>
+                        <?php if ($inquiriesArray) {
+                            foreach ($inquiriesArray as $inquiry): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($inquiry['inquiryID']); ?></td>
+                                    <td><?= htmlspecialchars($inquiry['inquiryDescription']); ?></td>
+                                    <td><?= htmlspecialchars($inquiry['inquiryDate']); ?></td>
+                                    <td><?= htmlspecialchars($inquiry['customerID']); ?></td>
+                                    <td><?= htmlspecialchars($inquiry['productID']); ?></td>
+                                    <td><?= htmlspecialchars($inquiry['inquiryStatus']); ?></td>
+                                </tr>
+                            <?php endforeach; 
+                        } else {
+                            echo "No inquiries found.";
+                        } ?>
                     </tbody>
                 </table>
             </div>

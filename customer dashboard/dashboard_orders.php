@@ -1,5 +1,8 @@
 <?php
-session_start(); // Start the session
+session_start();
+
+include '../config.php';
+// Start the session
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -14,7 +17,79 @@ $userEmail = $_SESSION['user_email'];
 $userId = $_SESSION['user_id'];
 
 echo "Welcome, $userName! Your email is $userEmail. id is $userId";
+
+
+
+
+// Select the 'Payment' collection first
+$paymentCollection = $database->Payment;
+
+// Fetch payments for the logged-in customer
+$payments = $paymentCollection->find(['customerID' => $userId]);
+
+// Convert the MongoDB cursor to an array for easier handling
+$paymentsArray = iterator_to_array($payments);
+
+// Select the 'Order' collection
+$orderCollection = $database->Order;
+
+// Array to hold the combined order and payment data
+$ordersWithPayment = [];
+
+if ($paymentsArray) {
+    // Loop through each payment and fetch corresponding orders
+    foreach ($paymentsArray as $payment) {
+        // Get the paymentID from the payment document
+        $paymentId = $payment['paymentID'];
+
+        // Debug: Print paymentID to check
+        echo "Payment ID: " . $paymentId . "<br>";
+
+        // Fetch the related order document(s) from the Order collection using paymentID
+        $orders = $orderCollection->find(['paymentID' => $paymentId]);
+
+        // Convert the MongoDB cursor to an array for easier handling
+        $ordersArray = iterator_to_array($orders);
+
+        // Debug: Print orders found for this paymentID
+        if ($ordersArray) {
+            echo "Orders found for PaymentID: " . $paymentId . "<br>";
+            print_r($ordersArray); // Print the orders for verification
+        } else {
+            echo "No orders found for PaymentID: " . $paymentId . "<br>";
+        }
+
+        // Loop through each order and combine with payment data
+        foreach ($ordersArray as $order) {
+            // Combine the order and payment data
+            $ordersWithPayment[] = [
+                'orderId' => $order['orderID'],
+                'checkoutId' => $payment['checkoutID'], 
+                'customerId' => $payment['customerID'],
+                'orderDate' => $order['orderDate'],
+                'paymentAmount' => $payment['paymentAmount']
+            ];
+
+            // Debug: Print combined order and payment data
+            echo "Order ID: " . $order['orderID'] . "<br>";
+            echo "Payment Amount: " . $payment['paymentAmount'] . "<br><br>";
+        }
+    }
+}
+
+echo "User ID: " . $userId . "<br>";
+
+// Check if any orders with payment data were combined
+if (empty($ordersWithPayment)) {
+    echo "No payment data found for the orders.";
+} else {
+    echo "Order and payment data fetched successfully.";
+}
 ?>
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -244,78 +319,36 @@ echo "Welcome, $userName! Your email is $userEmail. id is $userId";
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
-                                    <thead class="thead-dark">
-                                        <tr>
-                                            <th>Product Id</th>
-                                            <th>Checkout Id</th>
-                                            <th>Price</th>
-                                            <th>Order Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>01</td>
-                                            <td>CS101</td>
-                                            <td>$85</td>
-                                            <td>2024-01-01</td>
-                                        </tr>
-                                        <tr>
-                                            <td>02</td>
-                                            <td>CS102</td>
-                                            <td>$88</td>
-                                            <td>2024-01-02</td>
-                                        </tr>
-                                        <tr>
-                                            <td>03</td>
-                                            <td>CS103</td>
-                                            <td>$90</td>
-                                            <td>2024-01-03</td>
-                                        </tr>
-                                        <tr>
-                                            <td>04</td>
-                                            <td>CS104</td>
-                                            <td>$87</td>
-                                            <td>2024-01-04</td>
-                                        </tr>
-                                        <tr>
-                                            <td>05</td>
-                                            <td>CS105</td>
-                                            <td>$80</td>
-                                            <td>2024-01-05</td>
-                                        </tr>
-                                        <tr>
-                                            <td>06</td>
-                                            <td>CS106</td>
-                                            <td>$92</td>
-                                            <td>2024-01-06</td>
-                                        </tr>
-                                        <tr>
-                                            <td>07</td>
-                                            <td>CS107</td>
-                                            <td>$89</td>
-                                            <td>2024-01-07</td>
-                                        </tr>
-                                        <tr>
-                                            <td>08</td>
-                                            <td>CS108</td>
-                                            <td>$84</td>
-                                            <td>2024-01-08</td>
-                                        </tr>
-                                        <tr>
-                                            <td>09</td>
-                                            <td>CS109</td>
-                                            <td>$91</td>
-                                            <td>2024-01-09</td>
-                                        </tr>
-                                        <tr>
-                                            <td>10</td>
-                                            <td>CS110</td>
-                                            <td>$86</td>
-                                            <td>2024-01-10</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                            <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Order Id</th>
+                                        <th>Checkout Id</th>
+                                        <th>Customer Id</th>
+                                        <th>Order Date</th>
+                                        <th>Total Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    // Check if there are any orders to display
+                                    if (!empty($ordersWithPayment)) {
+                                        // Loop through each combined order and payment data
+                                        foreach ($ordersWithPayment as $orderData) { ?>
+                                            <tr>
+                                                <td><?= htmlspecialchars($order['orderID']); ?></td>
+                                                <td><?= htmlspecialchars($payment['checkoutID']); ?></td>
+                                                <td><?= htmlspecialchars($orderData['customerId']); ?></td>
+                                                <td><?= htmlspecialchars($order['orderDate']); ?></td>
+                                                <td>$<?= htmlspecialchars($payment['paymentAmount']); ?></td>
+                                            </tr>
+                                        <?php }
+                                    } else {
+                                        echo "<tr><td colspan='5'>No orders found.</td></tr>";
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                             </div>
                         </div>
                     </div>
