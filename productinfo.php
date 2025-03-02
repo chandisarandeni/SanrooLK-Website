@@ -1,3 +1,76 @@
+<?php
+require 'config.php'; // Include database connection file
+
+session_start();
+
+$userId = $_SESSION['user_id'];
+
+// Get productID from URL
+if (isset($_GET['productID'])) {
+    $productID = $_GET['productID'];
+
+    // Fetch product details from the database
+    $productCollection = $database->Product;
+    $product = $productCollection->findOne(['productID' => $productID]);
+
+    // Fetch images if stored separately
+    $imageCollection = $database->Images; // Change if images are stored in a different collection
+    $productImages = $imageCollection->find(['productID' => $productID]);
+
+    if (!$product) {
+        die("Product not found!");
+    }
+} else {
+    die("Invalid request!");
+}
+
+$inquiryCollection = $database->Inquiry;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $productID = $_POST['productID'];
+    $customerID = $_POST['customerID'];
+    $inquiryDescription = trim($_POST['inquiryDescription']);
+    $inquiryDate = date("c"); // Current ISO 8601 date
+    $salesManagerID = "SMGR0001"; // Default or dynamically set
+
+    if (empty($inquiryDescription)) {
+        header("Location: product_page.php?error=Description is required");
+        exit;
+    }
+
+    // Generate auto-incremented inquiryID
+    $lastInquiry = $inquiryCollection->findOne([], ['sort' => ['inquiryID' => -1]]);
+    $lastID = $lastInquiry ? intval(substr($lastInquiry['inquiryID'], 3)) : 0;
+    $newInquiryID = "INQ" . str_pad($lastID + 1, 4, "0", STR_PAD_LEFT);
+
+    $insertData = [
+        "inquiryID" => $newInquiryID,
+        "inquiryDescription" => $inquiryDescription,
+        "inquiryDate" => $inquiryDate,
+        "inquiryStatus" => "Pending",
+        "customerID" => $customerID,
+        "productID" => $productID,
+        "salesManagerID" => $salesManagerID
+    ];
+
+    $result = $inquiryCollection->insertOne($insertData);
+
+    if ($result->getInsertedCount() > 0) {
+        echo "<script>
+            alert('Inquiry sent successfully!');
+            window.location.href = 'http://localhost/project/finalproject/SanrooLK-Website/customer%20dashboard/dashboard_inquiry.php';
+        </script>";
+    } else {
+        echo "<script>
+            alert('Failed to send inquiry. Please try again.');
+            window.location.href='product_page.php';
+        </script>";
+    }
+    exit;
+    
+}
+?>
+
 <!doctype html>
 <html lang="en">
     <head>
@@ -65,33 +138,47 @@
         </header>
         <main>
             <div class="container mt-5">
-                <div class="row">
+            <div class="row">
                     <div class="col-md-6">
-                        <img src="image.png" class="img-fluid" alt="Product Image">
+                        <!-- Main Product Image -->
+                        <img src="<?= htmlspecialchars($product['imageUrl']); ?>" class="img-fluid" alt="Product Image">
+                        
+                        <!-- Thumbnails -->
                         <div class="d-flex mt-2">
-                            <img src="image.png" class="img-thumbnail me-2" width="80">
-                            <img src="image.png" class="img-thumbnail me-2" width="80">
+                            <img src="<?= htmlspecialchars($product['imageUrl']); ?>" class="img-thumbnail me-2" width="80">
+                            <img src="<?= htmlspecialchars($product['imageUrl']); ?>" class="img-thumbnail me-2" width="80">
                         </div>
                     </div>
+                    
                     <div class="col-md-6">
-                        <h2>Backpack <span class="text-success">$76.00</span></h2>
+                    <form action="" method="post">
+                        <h2><?= htmlspecialchars($product['productName']); ?> 
+                            <span class="text-success">$<?= htmlspecialchars($product['productPrice']); ?></span>
+                        </h2>
                         <p>★★★★★ <small>2 Customer Reviews</small></p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at velit maximus, molestie est a, tempor magna.</p>
-                        <p><strong>REF:</strong> 4234J308</p>
-                        <p><strong>Available Quantity</strong></p>
+                        <p><?= htmlspecialchars($product['productDescription']); ?></p>
+                        <p><strong>REF:</strong> <?= htmlspecialchars($product['productSKU']); ?></p>
+                        <p><strong>Available Quantity:</strong> <?= htmlspecialchars($product['productQuantity']); ?></p>
+
+                        <input type="hidden" name="productID" value="<?= htmlspecialchars($product['productID']); ?>">
+                        <input type="hidden" name="customerID" value="<?= htmlspecialchars($_SESSION['user_id'] ?? 'CUST0001'); ?>"> 
+
                         <div class="mb-3">
                             <label for="quantity" class="form-label">Choose quantity</label>
-                            <input type="number" id="quantity" class="form-control w-25" value="1">
+                            <input type="number" id="quantity" name="quantity" class="form-control w-25" value="1">
                         </div>
-                        <button class="btn btn-success" onclick="sendInquiry()">SEND INQUIRY</button>
-                        <div class="mt-3">
-                            <span>Share with friends:</span>
-                            <a href="#" class="ms-2 text-dark"><i class='bx bxl-facebook' ></i></a>
-                            <a href="#" class="ms-2 text-dark"><i class='bx bxl-whatsapp'></i></a>
-                            <a href="#" class="ms-2 text-dark"><i class='bx bxl-instagram' ></i></a>
+
+                        <div class="mb-3">
+                            <label for="inquiry-description" class="form-label">Add a Description</label>
+                            <textarea id="inquiry-description" name="inquiryDescription" class="form-control" rows="3" placeholder="Enter your message..." required></textarea>
                         </div>
-                    </div>
+
+                        <button type="submit" class="btn btn-success">SEND INQUIRY</button>
+                    </form>
+
+
                 </div>
+
                 <div class="mt-5 container">
                     <ul class="nav nav-tabs" id="myTab">
                         <li class="nav-item">

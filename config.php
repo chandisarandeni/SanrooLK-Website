@@ -22,7 +22,7 @@ try {
         $allCollections[$collectionName] = $database->$collectionName; // Assign collection object
     }
 
-    echo "connection success";
+    echo "";
 
 } catch (MongoDB\Exception\AuthenticationException $e) {
     echo "Authentication Error: " . $e->getMessage();

@@ -9,13 +9,19 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+$userName = $_SESSION['user_name'];
+$userEmail = $_SESSION['user_email'];
+$userId = $_SESSION['user_id'];
+
+echo "Welcome, $userName! Your email is $userEmail. id is $userId";
+
 $customerId = $_SESSION['user_id']; // Get the logged-in customer ID
 
 // Select the 'inquiry' collection
 $inquiryCollection = $database->Inquiry; 
 
 // Fetch inquiries for the logged-in customer
-$inquiries = $inquiryCollection->find(['customerID' => $customerId]);
+$inquiries = $inquiryCollection->find(['customerID' => $userId]);
 
 // Convert MongoDB cursor to array for easier handling
 $inquiriesArray = iterator_to_array($inquiries);
@@ -212,7 +218,7 @@ $inquiriesArray = iterator_to_array($inquiries);
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-800" style="color: #4AAB3D">Maintenance</h1>
+    <h1 class="h3 mb-2 text-800" style="color: #4AAB3D">Inquiries</h1>
 
     
 

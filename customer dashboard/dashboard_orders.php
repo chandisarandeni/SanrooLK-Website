@@ -337,10 +337,10 @@ if (empty($ordersWithPayment)) {
                                         foreach ($ordersWithPayment as $orderData) { ?>
                                             <tr>
                                                 <td><?= htmlspecialchars($order['orderID']); ?></td>
-                                                <td><?= htmlspecialchars($payment['checkoutID']); ?></td>
+                                                <td><?= htmlspecialchars($orderData['checkoutId']); ?></td>
                                                 <td><?= htmlspecialchars($orderData['customerId']); ?></td>
-                                                <td><?= htmlspecialchars($order['orderDate']); ?></td>
-                                                <td>$<?= htmlspecialchars($payment['paymentAmount']); ?></td>
+                                                <td><?= htmlspecialchars($orderData['orderDate']); ?></td>
+                                                <td>$<?= htmlspecialchars($orderData['paymentAmount']); ?></td>
                                             </tr>
                                         <?php }
                                     } else {

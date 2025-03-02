@@ -175,17 +175,19 @@ try {
     <div class="row">
         <?php foreach ($products as $product): ?>
             <div class="col-md-4 mb-4">
-                <div class="card product-card">
-                    <img src="<?= htmlspecialchars($product['imageUrl']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['productName']); ?>">
-                    <div class="card-body text-center">
-                        <h6 class="card-title">
-                            <?= htmlspecialchars($product['productName']); ?> 
-                        </h6>
-                        <p>Quantity<span class="text-muted">(<?= htmlspecialchars($product['productQuantity']); ?>)</span></p>
-                        <p class="text-success">$<?= htmlspecialchars($product['productPrice']); ?></p>
-                        ⭐⭐⭐⭐⭐
+                <a href="productinfo.php?productID=<?= urlencode($product['productID']); ?>" class="text-decoration-none">
+                    <div class="card product-card">
+                        <img src="<?= htmlspecialchars($product['imageUrl']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['productName']); ?>">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">
+                                <?= htmlspecialchars($product['productName']); ?> 
+                            </h6>
+                            <p>Quantity <span class="text-muted">(<?= htmlspecialchars($product['productQuantity']); ?>)</span></p>
+                            <p class="text-success">$<?= htmlspecialchars($product['productPrice']); ?></p>
+                            ⭐⭐⭐⭐⭐
+                        </div>
                     </div>
-                </div>
+                </a>
             </div>
         <?php endforeach; ?>
     </div>
