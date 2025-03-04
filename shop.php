@@ -28,12 +28,23 @@ $popularProducts = $database->Product->find([], [
 // Convert the cursor to an array
 $newProducts = iterator_to_array($popularProducts);
 
+
+$categoriesCursor = $database->Product->aggregate([
+    ['$group' => [
+        '_id' => '$productCategory', // Group by category
+        'count' => ['$sum' => 1] // Count the number of products in each category
+    ]],
+    ['$sort' => ['_id' => 1]] // Sort categories alphabetically
+]);
+
+// Convert cursor to an array
+$categories = iterator_to_array($categoriesCursor);
  ?>
 <!doctype html>
 <html lang="en">
 
 <head>
-    <title>Title</title>
+    <title>Shop</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -118,13 +129,12 @@ $newProducts = iterator_to_array($popularProducts);
                         <div class="card mb-3" style="background-color: #f8f8f8;">
                             <div class="card-body">
                                 <h5 class="card-title">Categories</h5>
-                                <div class="categories d-flex flex-column">
-                                    <a href="#" class="category-link text-decoration-none text-dark"> Cloud Solution</a>
-                                    <a href="#" class="category-link text-decoration-none text-dark"> Cyber Data</a>
-                                    <a href="#" class="category-link text-decoration-none text-dark"> SEO Marketing</a>
-                                    <a href="#" class="category-link text-decoration-none text-dark"> UI/UX Design</a>
-                                    <a href="#" class="category-link text-decoration-none text-dark"> Web Development</a>
-                                    <a href="#" class="category-link text-decoration-none text-dark"> Artificial Intelligence</a>
+                                <div class="categories d-flex flex-column" style="color: #A9A9A9; font-weight: 500;">
+                                    <?php foreach ($categories as $category): ?>
+                                        <a href="products.php?category=<?= urlencode($category['_id']); ?>" class="category-link text-decoration-none text-dark">
+                                            <?= htmlspecialchars($category['_id']); ?> (<?= $category['count']; ?>)
+                                        </a>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>

@@ -225,5 +225,105 @@ h3 {
     transform: translateY(-3px);
 }
 
-/*related products info*/
+/*home page services cards*/
+/* Style for the services card */
+.services-card {
+    border: 1px solid #ddd; /* Light border for the card */
+    border-radius: 8px; /* Rounded corners */
+    overflow: hidden; /* Ensures content does not overflow */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow for the card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Hover effect for the services card */
+.services-card:hover {
+    transform: translateY(-5px); /* Slight lift effect */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* More prominent shadow on hover */
+}
+
+/* Style for the image */
+.services-card-images {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    transition: transform 0.3s ease; /* Smooth zoom effect */
+}
+
+/* Hover effect on the image */
+.services-card:hover .services-card-images {
+    transform: scale(1.1); /* Zooms in the image slightly */
+}
+
+/* Style for the card body */
+.services-body {
+    padding: 15px;
+    background-color: #fff; /* White background for the card body */
+}
+
+/* Style for the card title */
+.services-body .card-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #333; /* Dark text color for the title */
+}
+
+/* Style for the card description */
+.services-body .card-text {
+    font-size: 1rem;
+    color: #777; /* Lighter text for description */
+    margin-bottom: 15px; /* Space between text and button */
+}
+
+/* Style for the "Read More" button */
+.services-body .btn {
+    font-size: 1rem;
+    color: #007bff; /* Blue color for the button */
+    transition: color 0.3s ease; /* Smooth transition for button hover */
+}
+
+/* Hover effect for the "Read More" button */
+.services-body .btn:hover {
+    color: #0056b3; /* Darker blue when hovered */
+}
+
+/*home page project images*/
+.project-images img {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for zoom and shadow */
+}
+
+/* Hover effect for the project image */
+.project-images img:hover {
+    transform: scale(1.1); /* Zooms in the image slightly */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adds a soft shadow around the image */
+}
+
+/* Style for the expert image */
+.expert-image {
+    width: 100%; /* Ensures image takes full width of the card */
+    height: auto;
+    border-radius: 50%; /* Makes the image circular */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions for zoom and shadow */
+}
+
+/* Hover effect on the image */
+.team-card:hover .expert-image {
+    transform: scale(1.1); /* Slight zoom-in effect on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Adds a soft shadow effect */
+}
+
+/* Style for the team card */
+.team-card {
+    border: none;
+    border-radius: 15px; /* Rounded corners for the card */
+    overflow: hidden; /* Ensures content fits inside */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Soft shadow around the card */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
+}
+
+/* Hover effect on the card */
+.team-card:hover {
+    transform: translateY(-5px); /* Lift the card slightly on hover */
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2); /* Enhance the shadow on hover */
+}
 

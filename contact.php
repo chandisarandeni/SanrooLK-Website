@@ -59,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <!doctype html>
 <html lang="en">
     <head>
-        <title>Title</title>
+        <title>Contact</title>
         <!-- Required meta tags -->
         <meta charset="utf-8" />
         <meta
@@ -218,7 +218,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <footer class="footer">
                 <div class="container footer-content">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <img src="images/SanrooLogo.png" alt="">
                             <p>Desires to obtain pain of itself, because it is pain, but occasionally circumstances.</p>
                             <div class="social-icons">

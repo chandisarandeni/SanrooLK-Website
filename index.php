@@ -20,6 +20,7 @@ session_start(); // Start the session
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="animation.css" />
 </head>
 
 <body>
@@ -151,7 +152,7 @@ session_start(); // Start the session
                     <div class="row mt-5">
                         <div class="col-md-4">
                             <div class="card services-card border shadow-lg">
-                                <img src="/images/services-1.png" class="card-img-top" alt="Solar Panel">
+                                <img src="images/services-1.png" class="card-img-top services-card-images" alt="Solar Panel">
                                 <div class="card-body text-center services-body">
                                     <h5 class="card-title">Solar Panel Solutions</h5>
                                     <p class="card-text">High-performance solar panels designed to maximize energy production and efficiency for residential, commercial, and industrial use.</p>
@@ -162,7 +163,7 @@ session_start(); // Start the session
                     
                         <div class="col-md-4">
                             <div class="card services-card border shadow-lg">
-                                <img src="images/service-2.png" class="card-img-top" alt="Solar Panel">
+                                <img src="images/service-2.png" class="card-img-top services-card-images" alt="Solar Panel">
                                 <div class="card-body text-center services-body">
                                     <h5 class="card-title">Installation</h5>
                                     <p class="card-text">Expert solar panel installation services with a seamless and hassle-free process, ensuring maximum energy output and long-term reliability.</p>
@@ -173,7 +174,7 @@ session_start(); // Start the session
                     
                         <div class="col-md-4">
                             <div class="card services-card border shadow-lg">
-                                <img src="images/service-3.jpg" class="card-img-top" alt="Solar Panel">
+                                <img src="images/service-3.jpg" class="card-img-top services-card-images" alt="Solar Panel">
                                 <div class="card-body text-center services-body">
                                     <h5 class="card-title">Energy Storage Solutions</h5>
                                     <p class="card-text">Advanced battery storage solutions to help you store excess solar energy for use during nighttime or power outages, ensuring energy independence.</p>
@@ -238,18 +239,18 @@ session_start(); // Start the session
                         </div>
                     </div>
             
-                    <div class="row d-flex justify-content-center align-items-center">
+                    <div class="row d-flex justify-content-center align-items-center mt-5">
                         <div class="col-lg-3 col-md-6 col-sm-12">
-                            <img src="images/project-1.jpg" alt="Project 1" class="img-fluid rounded">
+                            <img src="images/project-1.jpg" alt="Project 1" class="img-fluid rounded project-images">
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12">
-                            <img src="images/project-2.jpg" alt="Project 2" class="img-fluid rounded">
+                            <img src="images/project-2.jpg" alt="Project 2" class="img-fluid rounded project-images">
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12">
-                            <img src="images/project-3.jpg" alt="Project 3" class="img-fluid rounded">
+                            <img src="images/project-3.jpg" alt="Project 3" class="img-fluid rounded project-images">
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-12">
-                            <img src="images/project-4.jpg" alt="Project 4" class="img-fluid rounded">
+                            <img src="images/project-4.jpg" alt="Project 4" class="img-fluid rounded project-images">
                         </div>
                     </div>
                 </div>
@@ -322,9 +323,9 @@ session_start(); // Start the session
                     <h6>OUR FEEDBACKS</h6>
                     <h2>EXPERTS READY TO SERVE</h2>
                     <div class="row d-flex justify-content-center align-items-center">
-                        <div class="col-lg-4 col-md-12 col-sm-12">
+                        <div class="col-lg-4 col-md-12 col-sm-12 expert-data">
                             <div class="card team-card d-flex justify-content-center align-items-center">
-                                <img src="images/expert-1.png" class="img-fluid" alt="Kevin Hardson">
+                                <img src="images/expert-1.png" class="img-fluid expert-image" alt="Kevin Hardson">
                                 <div class="team-info">
                                     <h5>KEVIN HARDSON</h5>
                                     <p>DESIGNER</p>
@@ -333,7 +334,7 @@ session_start(); // Start the session
                         </div>
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <div class="card team-card d-flex justify-content-center align-items-center">
-                                <img src="images/expert-2.png" class="img-fluid" alt="Jessica Brown">
+                                <img src="images/expert-2.png" class="img-fluid expert-image" alt="Jessica Brown">
                                 <div class="team-info">
                                     <h5>JESSICA BROWN</h5>
                                     <p>DEVELOPER</p>
@@ -342,7 +343,7 @@ session_start(); // Start the session
                         </div>
                         <div class="col-lg-4 col-md-12 col-sm-12">
                             <div class="card team-card d-flex justify-content-center align-items-center">
-                                <img src="images/expert-3.png" class="img-fluid" alt="Michale Smith">
+                                <img src="images/expert-3.png" class="img-fluid expert-image" alt="Michale Smith">
                                 <div class="team-info">
                                     <h5>MICHALE SMITH</h5>
                                     <p>CO FOUNDER</p>
