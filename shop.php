@@ -1,12 +1,20 @@
 <?php
-require 'config.php'; // Include MongoDB connection
+require 'config.php';
+
+
+
+
 
 try {
+
+    $maxPrice = isset($_GET['maxPrice']) ? (int)$_GET['maxPrice'] : 10000;
     // Select the 'Product' collection
+
     $collection = $database->Product;
 
+    $products = $collection->find(['productPrice' => ['$lte' => $maxPrice]]);
+
     // Fetch all products
-    $products = $collection->find();
 } catch (Exception $e) {
     die("Error: " . $e->getMessage());
 } ?>
@@ -113,15 +121,19 @@ try {
                         <div class="card mb-3" style="background-color: #f0f0f0;">
                             <div class="card-body">
                                 <h5 class="card-title">Filter by Price</h5>    
-                                <input type="range" class="form-range mb-2" min="10" max="10000" value="60"
-                                    id="priceRange">
-                                <small>Price: $<span id="maxPrice">10000</span></small>
+                                
+                                <label for="priceRange" class="form-label">Select Price Range:</label>
+                                <input type="range" class="form-range mb-2" min="10" max="10000" value="60" id="priceRange">
+                                
+                                <small>Price: $<span id="maxPrice" aria-live="polite">60</span></small>
+                                
                                 <div class="mt-2">
                                     <button class="btn btn-success btn-sm">Apply</button>
                                     <button class="btn btn-outline-secondary btn-sm">Reset</button>
                                 </div>
                             </div>
                         </div>
+
 
                         <!-- Popular Products -->
                         <div class="card" style="background-color: #f8f8f8;">
@@ -157,21 +169,9 @@ try {
                 </div>
 
                 <!-- Product Grid Section -->
-                <?php
-require 'config.php'; // Include MongoDB connection
 
-try {
-    // Select the 'Product' collection
-    $collection = $database->Product;
 
-    // Fetch all products
-    $products = $collection->find();
-} catch (Exception $e) {
-    die("Error: " . $e->getMessage());
-}
-?>
-
-<div class="col-lg-9">
+                <div class="col-lg-9">
     <div class="row">
         <?php foreach ($products as $product): ?>
             <div class="col-md-4 mb-4">

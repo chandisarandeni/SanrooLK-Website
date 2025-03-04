@@ -7,6 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Capture form data
     $customerID = $_POST['customerID'];  // From form (auto-generated)
     $customerFullName = $_POST['customerFullName'];
+    $customerNic = $_POST['customerNic'];
     $dob = $_POST['dob'];
     $address = $_POST['address'];
     $contact = $_POST['contact'];
@@ -27,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $customerData = [
         'customerID' => $customerID,
         'customerName' => $customerFullName,
+        'customerNIC' => $customerNic,
         'customerDoB' => $dob,
         'customerAddress' => $address,
         'customerContact' => $contact,

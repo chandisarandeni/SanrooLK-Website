@@ -46,21 +46,27 @@ function resetForm() {
 }
 
 //shop slider
+    document.addEventListener("DOMContentLoaded", function () {
+        let priceRange = document.getElementById("priceRange");
+        let maxPrice = document.getElementById("maxPrice");
 
+        // Update displayed max price
+        priceRange.addEventListener("input", function () {
+            maxPrice.textContent = this.value;
+        });
 
-// Get the slider, max price display, and reset button elements
-const priceRange = document.getElementById('priceRange');
-const maxPrice = document.getElementById('maxPrice');
-const resetButton = document.querySelector('.btn-outline-secondary');
+        // Apply filter on button click
+        document.querySelector(".btn-success").addEventListener("click", function () {
+            let selectedPrice = priceRange.value;
+            window.location.href = "shop.php?maxPrice=" + selectedPrice;
+        });
 
-// Update the price display when the slider is moved
-priceRange.addEventListener('input', function() {
-    maxPrice.textContent = priceRange.value;
-});
+        // Reset button
+        document.querySelector(".btn-outline-secondary").addEventListener("click", function () {
+            window.location.href = "shop.php";
+        });
+    });
 
-// Reset the price range and display when the reset button is clicked
-resetButton.addEventListener('click', function() {
-    priceRange.value = 0; // Reset the slider value
-    maxPrice.textContent = priceRange.value; // Update the displayed price
-});
+    console.log(priceRange, maxPrice);
+
 

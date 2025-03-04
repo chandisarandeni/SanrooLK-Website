@@ -63,7 +63,7 @@ $nextCustomerID = generateNextCustomerId($customerCollection);
                         <!-- Left Side Image -->
                         <div class="col-xl-6 d-none d-xl-block">
                             <img src="images/register-background.jpg" alt="Sample photo" class="img-fluid w-100"
-                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; object-fit: cover; height: 800px;" />
+                                style="border-top-left-radius: .25rem; border-bottom-left-radius: .25rem; object-fit: cover; height: 1175px;" />
                         </div>
 
 
@@ -83,6 +83,12 @@ $nextCustomerID = generateNextCustomerId($customerCollection);
                                     <div class="form-outline mb-4">
                                         <label class="form-label" for="customerFullName">Full Name</label>
                                         <input type="text" id="customerFullName" name="customerFullName" class="form-control form-control-lg" required />
+                                    </div>
+
+                                    <!-- Full Name -->
+                                    <div class="form-outline mb-4">
+                                        <label class="form-label" for="customerFullName">ID Number</label>
+                                        <input type="text" id="customerNic" name="customerNic" class="form-control form-control-lg" required />
                                     </div>
 
                                     <!-- Date of Birth -->
