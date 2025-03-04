@@ -39,6 +39,20 @@ $categoriesCursor = $database->Product->aggregate([
 
 // Convert cursor to an array
 $categories = iterator_to_array($categoriesCursor);
+
+$selectedCategory = isset($_GET['category']) ? $_GET['category'] : null;
+
+if ($selectedCategory) {
+    // Fetch products that match the selected category
+    $collection = $database->Product;
+    $productsCursor = $collection->find(['productCategory' => $selectedCategory]);
+    $products = iterator_to_array($productsCursor);
+} else {
+    // Fetch all products if no category is selected
+    $collection = $database->Product;
+    $productsCursor = $collection->find([], ['limit' => 10]); // Limit for performance
+    $products = iterator_to_array($productsCursor);
+}
  ?>
 <!doctype html>
 <html lang="en">
@@ -131,13 +145,15 @@ $categories = iterator_to_array($categoriesCursor);
                                 <h5 class="card-title">Categories</h5>
                                 <div class="categories d-flex flex-column" style="color: #A9A9A9; font-weight: 500;">
                                     <?php foreach ($categories as $category): ?>
-                                        <a href="products.php?category=<?= urlencode($category['_id']); ?>" class="category-link text-decoration-none text-dark">
+                                        <a href="products.php?category=<?= urlencode($category['_id']); ?>" 
+                                        class="category-link text-decoration-none text-dark">
                                             <?= htmlspecialchars($category['_id']); ?> (<?= $category['count']; ?>)
                                         </a>
                                     <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
+
 
                         <!-- Filter by Price -->
                         <!-- Filter by Price -->
@@ -196,26 +212,29 @@ $categories = iterator_to_array($categoriesCursor);
 
 
                 <div class="col-lg-9">
-                    <div class="row">
-                        <?php foreach ($products as $product): ?>
-                            <div class="col-md-4 mb-4">
-                                <a href="productinfo.php?productID=<?= urlencode($product['productID']); ?>" class="text-decoration-none">
-                                    <div class="card product-card">
-                                        <img src="<?= htmlspecialchars($product['imageUrl']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['productName']); ?>">
-                                        <div class="card-body text-center">
-                                            <h6 class="card-title">
-                                                <?= htmlspecialchars($product['productName']); ?> 
-                                            </h6>
-                                            <p>Quantity <span class="text-muted">(<?= htmlspecialchars($product['productQuantity']); ?>)</span></p>
-                                            <p class="text-success">$<?= htmlspecialchars($product['productPrice']); ?></p>
-                                            ⭐⭐⭐⭐⭐
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        <?php endforeach; ?>
+    <div class="row">
+        <?php 
+        // Assuming $products is already filtered by the selected category
+        foreach ($products as $product): ?>
+            <div class="col-md-4 mb-4">
+                <a href="productinfo.php?productID=<?= urlencode($product['productID']); ?>" class="text-decoration-none">
+                    <div class="card product-card">
+                        <img src="<?= htmlspecialchars($product['imageUrl']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['productName']); ?>">
+                        <div class="card-body text-center">
+                            <h6 class="card-title">
+                                <?= htmlspecialchars($product['productName']); ?> 
+                            </h6>
+                            <p>Quantity <span class="text-muted">(<?= htmlspecialchars($product['productQuantity']); ?>)</span></p>
+                            <p class="text-success">$<?= htmlspecialchars($product['productPrice']); ?></p>
+                            ⭐⭐⭐⭐⭐
+                        </div>
                     </div>
-                </div>
+                </a>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
 
 
 
