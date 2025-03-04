@@ -21,71 +21,130 @@ echo "Welcome, $userName! Your email is $userEmail. id is $userId";
 
 
 
-// Select the 'Payment' collection first
+// Select the 'Payment' collection
 $paymentCollection = $database->Payment;
 
 // Fetch payments for the logged-in customer
 $payments = $paymentCollection->find(['customerID' => $userId]);
 
-// Convert the MongoDB cursor to an array for easier handling
+// Convert MongoDB cursor to an array for easier handling
 $paymentsArray = iterator_to_array($payments);
 
-// Select the 'Order' collection
+// Select the necessary collections
 $orderCollection = $database->Order;
+$productCollection = $database->Product;
+$inquiryCollection = $database->Inquiry;
+$checkoutCollection = $database->Checkout;
 
-// Array to hold the combined order and payment data
+// Array to hold the combined order, payment, product, and quantity data
 $ordersWithPayment = [];
 
 if ($paymentsArray) {
+    // Fetch all inquiries for the logged-in customer
+    $inquiries = $inquiryCollection->find(['customerID' => $userId]);
+    $inquiryArray = iterator_to_array($inquiries);
+
+    // Map inquiry data for easy lookup
+    $inquiryMap = [];
+    foreach ($inquiryArray as $inquiry) {
+        $inquiryMap[$inquiry['productID']] = $inquiry['quantity'];
+    }
+
     // Loop through each payment and fetch corresponding orders
     foreach ($paymentsArray as $payment) {
-        // Get the paymentID from the payment document
         $paymentId = $payment['paymentID'];
+        $checkoutId = $payment['checkoutID']; // Fetch checkoutID
 
-        // Debug: Print paymentID to check
+        // Debug: Print paymentID
         echo "Payment ID: " . $paymentId . "<br>";
 
-        // Fetch the related order document(s) from the Order collection using paymentID
+        // Fetch related orders from Order collection
         $orders = $orderCollection->find(['paymentID' => $paymentId]);
-
-        // Convert the MongoDB cursor to an array for easier handling
         $ordersArray = iterator_to_array($orders);
 
-        // Debug: Print orders found for this paymentID
         if ($ordersArray) {
             echo "Orders found for PaymentID: " . $paymentId . "<br>";
-            print_r($ordersArray); // Print the orders for verification
         } else {
             echo "No orders found for PaymentID: " . $paymentId . "<br>";
         }
 
-        // Loop through each order and combine with payment data
-        foreach ($ordersArray as $order) {
-            // Combine the order and payment data
-            $ordersWithPayment[] = [
-                'orderId' => $order['orderID'],
-                'checkoutId' => $payment['checkoutID'], 
-                'customerId' => $payment['customerID'],
-                'orderDate' => $order['orderDate'],
-                'paymentAmount' => $payment['paymentAmount']
-            ];
+        // Fetch product IDs from the Checkout collection
+        $checkoutData = $checkoutCollection->find(['checkoutID' => $checkoutId]);
+        $checkoutArray = iterator_to_array($checkoutData);
 
-            // Debug: Print combined order and payment data
-            echo "Order ID: " . $order['orderID'] . "<br>";
-            echo "Payment Amount: " . $payment['paymentAmount'] . "<br><br>";
+        if ($checkoutArray) {
+            echo "Checkout data found for CheckoutID: " . $checkoutId . "<br>";
+        } else {
+            echo "No checkout data found for CheckoutID: " . $checkoutId . "<br>";
+        }
+
+        // Extract product IDs from checkout data
+        $productIds = [];
+        foreach ($checkoutArray as $checkout) {
+            if (isset($checkout['productID'])) {
+                $productIds[] = $checkout['productID'];
+            }
+        }
+
+        // Fetch product details using the retrieved product IDs
+        $productsArray = [];
+        if (!empty($productIds)) {
+            $products = $productCollection->find(['productID' => ['$in' => $productIds]]);
+            $productsArray = iterator_to_array($products);
+        }
+
+        if ($productsArray) {
+            echo "Products found for CheckoutID: " . $checkoutId . "<br>";
+        } else {
+            echo "No products found for CheckoutID: " . $checkoutId . "<br>";
+        }
+
+        // Loop through each order and combine with payment, product, and quantity data
+        foreach ($ordersArray as $order) {
+            foreach ($productsArray as $product) {
+                $productId = $product['productID'];
+
+                // Fetch the quantity using customerID from Inquiry collection
+                $quantity = isset($inquiryMap[$productId]) ? $inquiryMap[$productId] : 0; // Default to 0 if not found
+
+                // Combine data
+                $ordersWithPayment[] = [
+                    'orderId' => $order['orderID'],
+                    'checkoutId' => $checkoutId,
+                    'customerId' => $payment['customerID'],
+                    'orderDate' => $order['orderDate'],
+                    'paymentAmount' => $payment['paymentAmount'],
+                    'productId' => $product['productID'],
+                    'productName' => $product['productName'],
+                    'quantity' => $quantity
+                ];
+
+                // Debugging Output
+                echo "Order ID: " . $order['orderID'] . "<br>";
+                echo "Payment Amount: " . $payment['paymentAmount'] . "<br>";
+                echo "Product ID: " . $product['productID'] . "<br>";
+                echo "Product Name: " . $product['productName'] . "<br>";
+                echo "Quantity: " . $quantity . "<br><br>";
+            }
         }
     }
 }
 
 echo "User ID: " . $userId . "<br>";
 
-// Check if any orders with payment data were combined
+// Final check if data is available
 if (empty($ordersWithPayment)) {
-    echo "No payment data found for the orders.";
+    echo "No payment, product, or quantity data found.";
 } else {
-    echo "Order and payment data fetched successfully.";
+    echo "Order, payment, product, and quantity data fetched successfully.";
 }
 ?>
+
+
+
+
+
+
 
 
 
@@ -320,35 +379,36 @@ if (empty($ordersWithPayment)) {
                         <div class="card-body">
                             <div class="table-responsive">
                             <table class="table table-bordered table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>Order Id</th>
-                                        <th>Checkout Id</th>
-                                        <th>Customer Id</th>
-                                        <th>Order Date</th>
-                                        <th>Total Amount</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    // Check if there are any orders to display
-                                    if (!empty($ordersWithPayment)) {
-                                        // Loop through each combined order and payment data
-                                        foreach ($ordersWithPayment as $orderData) { ?>
-                                            <tr>
-                                                <td><?= htmlspecialchars($order['orderID']); ?></td>
-                                                <td><?= htmlspecialchars($orderData['checkoutId']); ?></td>
-                                                <td><?= htmlspecialchars($orderData['customerId']); ?></td>
-                                                <td><?= htmlspecialchars($orderData['orderDate']); ?></td>
-                                                <td>$<?= htmlspecialchars($orderData['paymentAmount']); ?></td>
-                                            </tr>
-                                        <?php }
-                                    } else {
-                                        echo "<tr><td colspan='5'>No orders found.</td></tr>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Product Id</th>
+                                            <th>Product Name</th>
+                                            <th>Order Date</th>
+                                            <th>Quantity</th>
+                                            <th>Total Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php
+                                        // Check if there are any orders to display
+                                        if (!empty($ordersWithPayment)) {
+                                            // Loop through each order
+                                            foreach ($ordersWithPayment as $orderData) { ?>
+                                                <tr>
+                                                    <td><?= htmlspecialchars($orderData['productId']); ?></td>
+                                                    <td><?= htmlspecialchars($orderData['productName']); ?></td>
+                                                    <td><?= htmlspecialchars($orderData['orderDate']); ?></td>
+                                                    <td><?= htmlspecialchars($orderData['quantity']); ?></td>
+                                                    <td>$<?= htmlspecialchars($orderData['paymentAmount']); ?></td>
+                                                </tr>
+                                            <?php }
+                                        } else {
+                                            echo "<tr><td colspan='5'>No orders found.</td></tr>";
+                                        }
+                                        ?>
+                                    </tbody>
+                                </table>
+
                             </div>
                         </div>
                     </div>
