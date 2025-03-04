@@ -1,23 +1,25 @@
 <?php
 require 'config.php';
 
+function getFilteredProducts($database, $minPrice = 10, $maxPrice = 5000) {
+    try {
+        $collection = $database->Product;
+        return $collection->find([
+            'productPrice' => ['$gte' => $minPrice, '$lte' => $maxPrice]
+        ]);
+    } catch (Exception $e) {
+        die("Error: " . $e->getMessage());
+    }
+}
 
+// Get min and max price from GET request (default to 10 and 10000 if not set)
+$minPrice = isset($_GET['minPrice']) ? (int)$_GET['minPrice'] : 10;
+$maxPrice = isset($_GET['maxPrice']) ? (int)$_GET['maxPrice'] : 5000;
 
+// Fetch products using the function
+$products = getFilteredProducts($database, $minPrice, $maxPrice);
 
-
-try {
-
-    $maxPrice = isset($_GET['maxPrice']) ? (int)$_GET['maxPrice'] : 10000;
-    // Select the 'Product' collection
-
-    $collection = $database->Product;
-
-    $products = $collection->find(['productPrice' => ['$lte' => $maxPrice]]);
-
-    // Fetch all products
-} catch (Exception $e) {
-    die("Error: " . $e->getMessage());
-} ?>
+ ?>
 <!doctype html>
 <html lang="en">
 
@@ -118,21 +120,32 @@ try {
                         </div>
 
                         <!-- Filter by Price -->
-                        <div class="card mb-3" style="background-color: #f0f0f0;">
-                            <div class="card-body">
-                                <h5 class="card-title">Filter by Price</h5>    
-                                
-                                <label for="priceRange" class="form-label">Select Price Range:</label>
-                                <input type="range" class="form-range mb-2" min="10" max="10000" value="60" id="priceRange">
-                                
-                                <small>Price: $<span id="maxPrice" aria-live="polite">60</span></small>
-                                
-                                <div class="mt-2">
-                                    <button class="btn btn-success btn-sm">Apply</button>
-                                    <button class="btn btn-outline-secondary btn-sm">Reset</button>
+                        <!-- Filter by Price -->
+                            <div class="card mb-3" style="background-color: #f0f0f0;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Filter by Price</h5>    
+
+                                    <label for="priceRange" class="form-label">Select Price Range:</label>
+                                    <input type="range" class="form-range mb-2" min="10" max="10000" value="10000" id="priceRange" step="1">
+                                    
+                                    <small>Price: $<span id="minPrice" aria-live="polite">10</span> - $<span id="maxPrice" aria-live="polite">10000</span></small>
+
+                                    <div class="mt-2">
+                                        <form action="" method="GET">
+                                            <!-- Range Values -->
+                                            <input type="hidden" name="minPrice" id="minPriceValue" value="10">
+                                            <input type="hidden" name="maxPrice" id="maxPriceValue" value="10000">
+
+                                            <!-- Apply and Reset Buttons -->
+                                            <button class="btn btn-success btn-sm" type="submit">Apply</button>
+                                            <button class="btn btn-outline-secondary btn-sm" type="reset" onclick="resetFilter()">Reset</button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+
+
+
 
 
                         <!-- Popular Products -->
@@ -172,26 +185,27 @@ try {
 
 
                 <div class="col-lg-9">
-    <div class="row">
-        <?php foreach ($products as $product): ?>
-            <div class="col-md-4 mb-4">
-                <a href="productinfo.php?productID=<?= urlencode($product['productID']); ?>" class="text-decoration-none">
-                    <div class="card product-card">
-                        <img src="<?= htmlspecialchars($product['imageUrl']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['productName']); ?>">
-                        <div class="card-body text-center">
-                            <h6 class="card-title">
-                                <?= htmlspecialchars($product['productName']); ?> 
-                            </h6>
-                            <p>Quantity <span class="text-muted">(<?= htmlspecialchars($product['productQuantity']); ?>)</span></p>
-                            <p class="text-success">$<?= htmlspecialchars($product['productPrice']); ?></p>
-                            ⭐⭐⭐⭐⭐
-                        </div>
+                    <div class="row">
+                        <?php foreach ($products as $product): ?>
+                            <div class="col-md-4 mb-4">
+                                <a href="productinfo.php?productID=<?= urlencode($product['productID']); ?>" class="text-decoration-none">
+                                    <div class="card product-card">
+                                        <img src="<?= htmlspecialchars($product['imageUrl']); ?>" class="card-img-top" alt="<?= htmlspecialchars($product['productName']); ?>">
+                                        <div class="card-body text-center">
+                                            <h6 class="card-title">
+                                                <?= htmlspecialchars($product['productName']); ?> 
+                                            </h6>
+                                            <p>Quantity <span class="text-muted">(<?= htmlspecialchars($product['productQuantity']); ?>)</span></p>
+                                            <p class="text-success">$<?= htmlspecialchars($product['productPrice']); ?></p>
+                                            ⭐⭐⭐⭐⭐
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
-                </a>
-            </div>
-        <?php endforeach; ?>
-    </div>
-</div>
+                </div>
+
 
 
                 <!-- End of Product Grid -->
@@ -253,7 +267,44 @@ try {
         </footer>
     </footer>
 
-    <script src="script.js"></script>
+    <script>
+    const priceRange = document.getElementById("priceRange");
+const minPrice = document.getElementById("minPrice");
+const maxPrice = document.getElementById("maxPrice");
+const applyButton = document.getElementById("applyButton");
+
+// Update the price values based on the selected range (on slider input)
+priceRange.addEventListener("input", function() {
+    const minValue = priceRange.value;
+    const maxValue = priceRange.max;
+
+    minPrice.textContent = minValue;
+    maxPrice.textContent = maxValue;
+});
+
+// Function to apply filter (triggered by the Apply button)
+applyButton.addEventListener("click", function() {
+    const minValue = priceRange.value;
+    const maxValue = priceRange.max;
+
+    // Update the displayed min and max prices on apply
+    minPrice.textContent = minValue;
+    maxPrice.textContent = maxValue;
+
+    // Alert showing updated price range after Apply button click
+    alert(`Updated Price Range: $${minValue} - $${maxValue}`);
+});
+
+// Reset filter to default values
+function resetFilter() {
+    priceRange.value = 10;
+    priceRange.max = 5000;
+    minPrice.textContent = 10;
+    maxPrice.textContent = 5000;
+}
+
+</script>
+
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

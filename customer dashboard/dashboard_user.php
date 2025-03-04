@@ -129,7 +129,7 @@ if (!empty($userDetails)) {
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="dashboard_maintenance.html"
+                <a class="nav-link collapsed" href="dashboard_maintenance.php"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class='bx bxs-hard-hat'></i>
                     <span>Maintenance</span>
@@ -146,7 +146,7 @@ if (!empty($userDetails)) {
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item active">
-                <a class="nav-link" href="dashboard_user.html"
+                <a class="nav-link" href="dashboard_user.php"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class='bx bxs-user' ></i>
                     <span>User</span>

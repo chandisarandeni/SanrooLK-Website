@@ -46,27 +46,10 @@ function resetForm() {
 }
 
 //shop slider
-    document.addEventListener("DOMContentLoaded", function () {
-        let priceRange = document.getElementById("priceRange");
-        let maxPrice = document.getElementById("maxPrice");
 
-        // Update displayed max price
-        priceRange.addEventListener("input", function () {
-            maxPrice.textContent = this.value;
-        });
 
-        // Apply filter on button click
-        document.querySelector(".btn-success").addEventListener("click", function () {
-            let selectedPrice = priceRange.value;
-            window.location.href = "shop.php?maxPrice=" + selectedPrice;
-        });
 
-        // Reset button
-        document.querySelector(".btn-outline-secondary").addEventListener("click", function () {
-            window.location.href = "shop.php";
-        });
-    });
 
-    console.log(priceRange, maxPrice);
+
 
 

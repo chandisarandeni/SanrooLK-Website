@@ -46,9 +46,16 @@ if ($paymentsArray) {
 
     // Map inquiry data for easy lookup
     $inquiryMap = [];
-    foreach ($inquiryArray as $inquiry) {
+foreach ($inquiryArray as $inquiry) {
+    // Check if both 'productID' and 'quantity' exist in the inquiry
+    if (isset($inquiry['productID']) && isset($inquiry['quantity'])) {
         $inquiryMap[$inquiry['productID']] = $inquiry['quantity'];
+    } else {
+        // Log or handle the error if 'productID' or 'quantity' is missing
+         // This will show the full inquiry for debugging purposes
     }
+}
+
 
     // Loop through each payment and fetch corresponding orders
     foreach ($paymentsArray as $payment) {
@@ -56,16 +63,16 @@ if ($paymentsArray) {
         $checkoutId = $payment['checkoutID']; // Fetch checkoutID
 
         // Debug: Print paymentID
-        echo "Payment ID: " . $paymentId . "<br>";
+        //echo "Payment ID: " . $paymentId . "<br>";
 
         // Fetch related orders from Order collection
         $orders = $orderCollection->find(['paymentID' => $paymentId]);
         $ordersArray = iterator_to_array($orders);
 
         if ($ordersArray) {
-            echo "Orders found for PaymentID: " . $paymentId . "<br>";
+            //echo "Orders found for PaymentID: " . $paymentId . "<br>";
         } else {
-            echo "No orders found for PaymentID: " . $paymentId . "<br>";
+           // echo "No orders found for PaymentID: " . $paymentId . "<br>";
         }
 
         // Fetch product IDs from the Checkout collection
@@ -73,9 +80,9 @@ if ($paymentsArray) {
         $checkoutArray = iterator_to_array($checkoutData);
 
         if ($checkoutArray) {
-            echo "Checkout data found for CheckoutID: " . $checkoutId . "<br>";
+           // echo "Checkout data found for CheckoutID: " . $checkoutId . "<br>";
         } else {
-            echo "No checkout data found for CheckoutID: " . $checkoutId . "<br>";
+           // echo "No checkout data found for CheckoutID: " . $checkoutId . "<br>";
         }
 
         // Extract product IDs from checkout data
@@ -94,9 +101,9 @@ if ($paymentsArray) {
         }
 
         if ($productsArray) {
-            echo "Products found for CheckoutID: " . $checkoutId . "<br>";
+            //echo "Products found for CheckoutID: " . $checkoutId . "<br>";
         } else {
-            echo "No products found for CheckoutID: " . $checkoutId . "<br>";
+           // echo "No products found for CheckoutID: " . $checkoutId . "<br>";
         }
 
         // Loop through each order and combine with payment, product, and quantity data
@@ -120,11 +127,11 @@ if ($paymentsArray) {
                 ];
 
                 // Debugging Output
-                echo "Order ID: " . $order['orderID'] . "<br>";
-                echo "Payment Amount: " . $payment['paymentAmount'] . "<br>";
-                echo "Product ID: " . $product['productID'] . "<br>";
-                echo "Product Name: " . $product['productName'] . "<br>";
-                echo "Quantity: " . $quantity . "<br><br>";
+               // echo "Order ID: " . $order['orderID'] . "<br>";
+              //  echo "Payment Amount: " . $payment['paymentAmount'] . "<br>";
+              //  echo "Product ID: " . $product['productID'] . "<br>";
+              //  echo "Product Name: " . $product['productName'] . "<br>";
+              //  echo "Quantity: " . $quantity . "<br><br>";
             }
         }
     }
@@ -200,7 +207,7 @@ if (empty($ordersWithPayment)) {
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="dashboard_orders.html">
+                <a class="nav-link" href="dashboard_orders.php">
                     <i class='bx bxs-box'></i>
                     <span>Orders</span></a>
             </li>
@@ -213,7 +220,7 @@ if (empty($ordersWithPayment)) {
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="dashboard_maintenance.html"
+                <a class="nav-link collapsed" href="dashboard_inquiry.php"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class='bx bx-task'></i>
                     <span>inquiry</span>
@@ -230,7 +237,7 @@ if (empty($ordersWithPayment)) {
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="dashboard_maintenance.html"
+                <a class="nav-link collapsed" href="dashboard_maintenance.php"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class='bx bxs-hard-hat'></i>
                     <span>Maintenance</span>
@@ -283,45 +290,13 @@ if (empty($ordersWithPayment)) {
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class='bx bx-search'></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                    
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 
                         <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class='bx bx-search'></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn" type="button">
-                                                <i class='bx bx-search'></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
+                        
 
 
                         <div class="topbar-divider d-none d-sm-block"></div>
