@@ -16,7 +16,7 @@ $userName = $_SESSION['user_name'];
 $userEmail = $_SESSION['user_email'];
 $userId = $_SESSION['user_id'];
 
-echo "Welcome, $userName! Your email is $userEmail. id is $userId";
+//echo "Welcome, $userName! Your email is $userEmail. id is $userId";
 
 
 
@@ -137,13 +137,13 @@ foreach ($inquiryArray as $inquiry) {
     }
 }
 
-echo "User ID: " . $userId . "<br>";
+//echo "User ID: " . $userId . "<br>";
 
 // Final check if data is available
 if (empty($ordersWithPayment)) {
-    echo "No payment, product, or quantity data found.";
+    //echo "No payment, product, or quantity data found.";
 } else {
-    echo "Order, payment, product, and quantity data fetched successfully.";
+    //echo "Order, payment, product, and quantity data fetched successfully.";
 }
 ?>
 
@@ -199,7 +199,9 @@ if (empty($ordersWithPayment)) {
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">
+                    <img src="images/dashboard_logo.png" alt="" width="150" height="50">
+                </div>
             </a>
 
             <!-- Divider -->

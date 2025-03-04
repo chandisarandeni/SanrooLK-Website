@@ -15,7 +15,7 @@ $userName = $_SESSION['user_name'];
 $userEmail = $_SESSION['user_email'];
 $userId = $_SESSION['user_id'];
 
-echo "Welcome, $userName! Your email is $userEmail. id is $userId";
+//echo "Welcome, $userName! Your email is $userEmail. id is $userId";
 
 // Get user ID from session
 
@@ -34,7 +34,7 @@ $customerName = $customerEmail = $customerContact = $customerAddress = 'Not avai
 
 if (!empty($userDetails)) {
     // Fetch user details
-    echo "Data Retrieved Successfully";
+    //echo "Data Retrieved Successfully";
     $customerID = $userDetails['customerID'] ?? 'Not available';
     $customerName = $userDetails['customerName'] ?? 'Not available';
     $customerDoB = $userDetails['customerDoB'] ?? 'Not available';
@@ -91,7 +91,9 @@ if (!empty($userDetails)) {
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <div class="sidebar-brand-text mx-3">
+                    <img src="images/dashboard_logo.png" alt="" width="150" height="50">
+                </div>
             </a>
 
             <!-- Divider -->
