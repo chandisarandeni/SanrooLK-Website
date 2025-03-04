@@ -1,5 +1,6 @@
 <?php
 require 'config.php';
+session_start();
 
 function getFilteredProducts($database, $minPrice = 10, $maxPrice = 5000) {
     try {
@@ -18,6 +19,14 @@ $maxPrice = isset($_GET['maxPrice']) ? (int)$_GET['maxPrice'] : 5000;
 
 // Fetch products using the function
 $products = getFilteredProducts($database, $minPrice, $maxPrice);
+
+// Fetch the first 4 products from the Product collection
+$popularProducts = $database->Product->find([], [
+    'limit' => 4  // Limit the number of products to 4
+]);
+
+// Convert the cursor to an array
+$newProducts = iterator_to_array($popularProducts);
 
  ?>
 <!doctype html>
@@ -63,31 +72,32 @@ $products = getFilteredProducts($database, $minPrice, $maxPrice);
                 <!-- Navbar Links -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-                        <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.php">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="shop.php">Shop</a></li>
+                        <li class="nav-item"><a class="nav-link" href="news.php">News</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                     </ul>
 
-                    <!-- Login Button -->
-                    <a href="customerlogin.html" class="btn btn-success me-3">Login</a>
-
-                    <!-- Profile Dropdown -->
-                    <div class="dropdown">
-                        <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown"
-                            data-bs-toggle="dropdown" alt="Profile">
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Profile</a></li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item" href="#">Logout</a></li>
-                        </ul>
-                    </div>
+                    <!-- Conditionally show Login or Profile based on session -->
+                    <?php if (isset($_SESSION['user_name'])): ?>
+                        <!-- Profile Dropdown -->
+                        <div class="dropdown">
+                            <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile" />
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_orders.php">Orders</a></li>
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_maintenance.php">Maintenance</a></li>
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_user.php">User</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                            </ul>
+                        </div>
+                    <?php else: ?>
+                        <!-- Login Button -->
+                        <a href="customerlogin.php" class="btn btn-success me-3">Login</a>
+                    <?php endif; ?>
                 </div>
+            </div>
             </div>
         </nav>
         <div class="container-fluid">
@@ -153,27 +163,18 @@ $products = getFilteredProducts($database, $minPrice, $maxPrice);
                             <div class="card-body">
                                 <h5 class="card-title">Popular Products</h5>
                                 <div class="popular-products">
-                                    <a href="#" class="d-flex align-items-center text-decoration-none my-2">
-                                        <div class="product-image"></div>
-                                        <div>
-                                            <p class="mb-0">Best Headset</p>
-                                            <p class="mb-0 text-muted">$45.00</p>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="d-flex align-items-center text-decoration-none my-2">
-                                        <div class="product-image"></div>
-                                        <div>
-                                            <p class="mb-0">Wireless Mouse</p>
-                                            <p class="mb-0 text-muted">$30.00</p>
-                                        </div>
-                                    </a>
-                                    <a href="#" class="d-flex align-items-center text-decoration-none my-2">
-                                        <div class="product-image"></div>
-                                        <div>
-                                            <p class="mb-0">Smart Keyboard</p>
-                                            <p class="mb-0 text-muted">$70.00</p>
-                                        </div>
-                                    </a>
+                                    <?php foreach ($newProducts as $popProduct): ?>
+                                        <a href="productinfo.php?productID=<?= urlencode($popProduct['productID']); ?>" class="d-flex align-items-center text-decoration-none my-2">
+                                            <div class="product-image">
+                                                <!-- Display the product image -->
+                                                <img src="<?= htmlspecialchars($popProduct['imageUrl']); ?>" alt="<?= htmlspecialchars($product['productName']); ?>" class="img-fluid" style="width: 50px; height: 50px; object-fit: cover;">
+                                            </div>
+                                            <div>
+                                                <p class="mb-0"><?= htmlspecialchars($popProduct['productName']); ?></p>
+                                                <p class="mb-0 text-muted">$<?= htmlspecialchars($popProduct['productPrice']); ?></p>
+                                            </div>
+                                        </a>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +226,7 @@ $products = getFilteredProducts($database, $minPrice, $maxPrice);
         <footer class="footer">
             <div class="container footer-content">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <img src="images/SanrooLogo.png" alt="">
                         <p>Desires to obtain pain of itself, because it is pain, but occasionally circumstances.</p>
                         <div class="social-icons">
@@ -238,11 +239,11 @@ $products = getFilteredProducts($database, $minPrice, $maxPrice);
                     <div class="col-md-3">
                         <h5>Explore</h5>
                         <ul class="list-unstyled">
-                            <li><a href="#">About Company</a></li>
-                            <li><a href="#">Meet the Team</a></li>
-                            <li><a href="#">News & Media</a></li>
-                            <li><a href="#">Our Projects</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="services.php">Services</a></li>
+                            <li><a href="shop.php">Shop</a></li>
+                            <li><a href="news.php">News</a></li>
+                            <li><a href="contact.php">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
@@ -250,17 +251,6 @@ $products = getFilteredProducts($database, $minPrice, $maxPrice);
                         <p>No. 634, Dikwela Road, Siyabalape.</p>
                         <p><a href="mailto:sanrooprices@gmail.com">sanrooprices@gmail.com</a></p>
                         <p><a href="tel:+94701234567">+94 701234567</a></p>
-                    </div>
-                    <div class="col-md-2">
-                        <h5>Gallery</h5>
-                        <div class="gallery d-flex flex-wrap">
-                            <img src="image1.jpg" alt="Gallery Image">
-                            <img src="image2.jpg" alt="Gallery Image">
-                            <img src="image3.jpg" alt="Gallery Image">
-                            <img src="image4.jpg" alt="Gallery Image">
-                            <img src="image5.jpg" alt="Gallery Image">
-                            <img src="image6.jpg" alt="Gallery Image">
-                        </div>
                     </div>
                 </div>
             </div>

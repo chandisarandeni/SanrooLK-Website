@@ -39,12 +39,11 @@ session_start(); // Start the session
                 <!-- Navbar Links -->
                 <div class="collapse navbar-collapse" id="navbarNav">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-                        <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.php">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="shop.php">Shop</a></li>
+                        <li class="nav-item"><a class="nav-link" href="news.php">News</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                     </ul>
 
                     <!-- Conditionally show Login or Profile based on session -->
@@ -54,7 +53,7 @@ session_start(); // Start the session
                             <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile" />
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="customer dashboard/dashboard_orders.php">Orders</a></li>
-                                <li><a class="dropdown-item" href="customer dashboard/dashboard_maintenance.html">Maintenance</a></li>
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_maintenance.php">Maintenance</a></li>
                                 <li><a class="dropdown-item" href="customer dashboard/dashboard_user.php">User</a></li>
                                 <li><hr class="dropdown-divider" /></li>
                                 <li><a class="dropdown-item" href="logout.php">Logout</a></li>
@@ -379,6 +378,9 @@ session_start(); // Start the session
                                         <input type="email" class="form-control" placeholder="Email Address">
                                     </div>
                                     <div class="mb-3">
+                                        <input type="tel" class="form-control" placeholder="Subject">
+                                    </div>
+                                    <div class="mb-3">
                                         <input type="tel" class="form-control" placeholder="Phone Number">
                                     </div>
                                     <div class="mb-3">
@@ -522,7 +524,7 @@ session_start(); // Start the session
         <footer class="footer">
             <div class="container footer-content">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <img src="images/SanrooLogo.png" alt="">
                         <p>Desires to obtain pain of itself, because it is pain, but occasionally circumstances.</p>
                         <div class="social-icons">
@@ -535,11 +537,11 @@ session_start(); // Start the session
                     <div class="col-md-3">
                         <h5>Explore</h5>
                         <ul class="list-unstyled">
-                            <li><a href="#">About Company</a></li>
-                            <li><a href="#">Meet the Team</a></li>
-                            <li><a href="#">News & Media</a></li>
-                            <li><a href="#">Our Projects</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li><a href="index.php">Home</a></li>
+                            <li><a href="services.php">Services</a></li>
+                            <li><a href="shop.php">Shop</a></li>
+                            <li><a href="news.php">News</a></li>
+                            <li><a href="contact.php">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-md-3">
@@ -547,17 +549,6 @@ session_start(); // Start the session
                         <p>No. 634, Dikwela Road, Siyabalape.</p>
                         <p><a href="mailto:sanrooprices@gmail.com">sanrooprices@gmail.com</a></p>
                         <p><a href="tel:+94701234567">+94 701234567</a></p>
-                    </div>
-                    <div class="col-md-2">
-                        <h5>Gallery</h5>
-                        <div class="gallery d-flex flex-wrap">
-                            <img src="image1.jpg" alt="Gallery Image">
-                            <img src="image2.jpg" alt="Gallery Image">
-                            <img src="image3.jpg" alt="Gallery Image">
-                            <img src="image4.jpg" alt="Gallery Image">
-                            <img src="image5.jpg" alt="Gallery Image">
-                            <img src="image6.jpg" alt="Gallery Image">
-                        </div>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,8 @@
+//reset contact form
+function resetForm() {
+    document.querySelector("form").reset(); // Reset the form
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     const counters = document.querySelectorAll(".stats-number");
     const speed = 200; // Adjust speed (Lower is faster)

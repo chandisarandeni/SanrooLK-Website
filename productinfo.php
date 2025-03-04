@@ -69,6 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
     
 }
+
+$relatedProducts = $database->Product->find([], ['limit' => 4]);
 ?>
 
 <!doctype html>
@@ -90,8 +92,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             crossorigin="anonymous"
         />
         <link rel="stylesheet" href="styles.css">
+        
         <link rel="stylesheet"
         href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+
     </head>
 
     <body>
@@ -110,29 +114,32 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
                     <!-- Navbar Links -->
                     <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="navbar-nav mx-auto">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                            <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-                            <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
-                        </ul>
-            
-                        <!-- Login Button -->
-                        <a href="customerlogin.html" class="btn btn-success me-3">Login</a>
-            
+                    <ul class="navbar-nav mx-auto">
+                        <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="services.php">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="shop.php">Shop</a></li>
+                        <li class="nav-item"><a class="nav-link" href="news.php">News</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
+                    </ul>
+
+                    <!-- Conditionally show Login or Profile based on session -->
+                    <?php if (isset($_SESSION['user_name'])): ?>
                         <!-- Profile Dropdown -->
                         <div class="dropdown">
-                            <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile">
+                            <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile" />
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_orders.php">Orders</a></li>
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_maintenance.html">Maintenance</a></li>
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_user.php">User</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             </ul>
                         </div>
-                    </div>
+                    <?php else: ?>
+                        <!-- Login Button -->
+                        <a href="customerlogin.php" class="btn btn-success me-3">Login</a>
+                    <?php endif; ?>
+                </div>
                 </div>
             </nav>
         </header>
@@ -188,15 +195,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <a class="nav-link" id="reviews-tab" data-bs-toggle="tab" href="#reviews">REVIEWS</a>
                         </li>
                     </ul>
-                    <div class="tab-content p-3 border">
+                    <div class="tab-content p-3 border" class="text-decoration-none">
                         <div class="tab-pane fade show active" id="description">
                             <h4>Description</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                            <ul>
-                                <li>Nam at elit nec neque suscipit gravida.</li>
-                                <li>Aenean egestas orci ac maximus tincidunt.</li>
-                                <li>Curabitur vel turpis et tellus cursus laoreet.</li>
-                            </ul>
+                            <p><?= htmlspecialchars($product['productDescription']); ?></p>
                         </div>
                         <div class="tab-pane fade" id="reviews">
                             <h4>Reviews</h4>
@@ -207,23 +209,81 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="mt-5">
                     <h4>Related Products</h4>
                     <div class="row">
-                        <div class="col-md-3">
-                            <img src="image.png" class="img-fluid">
-                            <p class="text-center">⭐️⭐️⭐️⭐️⭐️<br><strong>Headphone</strong> $32.00</p>
+                            <?php foreach ($relatedProducts as $product): ?>
+                                <div class="col-md-3 mb-4 related-products">
+                                    <div class="card h-100 product-realated-card">
+                                        <a href="productinfo.php?productID=<?= urlencode($product['productID']); ?>" class="text-decoration-none">
+                                            <img src="<?= htmlspecialchars($product['imageUrl']) ?>" class="card-img-top img-fluid related-product-img" alt="<?= htmlspecialchars($product['productName']) ?>">
+                                            <div class="card-body product-related-card-body">
+                                                <h5 class="card-title related-card-title"><?= htmlspecialchars($product['productName']) ?></h5>
+                                                <p class="card-text related-card-text">⭐️⭐️⭐️⭐️⭐️</p>
+                                                <p class="card-text related-card-text"><strong>$<?= htmlspecialchars($product['productPrice']) ?></strong></p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
                         </div>
-                        <div class="col-md-3">
-                            <img src="image.png" class="img-fluid">
-                            <p class="text-center">⭐️⭐️⭐️⭐️⭐️<br><strong>Lagage</strong> $32.00</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img src="image.png" class="img-fluid">
-                            <p class="text-center">⭐️⭐️⭐️⭐️⭐️<br><strong>Watch</strong> $32.00</p>
-                        </div>
-                        <div class="col-md-3">
-                            <img src="image.png" class="img-fluid">
-                            <p class="text-center">⭐️⭐️⭐️⭐️⭐️<br><strong>SD Card</strong> $32.00</p>
-                        </div>
-                    </div>
+                    <style>
+    /* Style for the related products row */
+
+/* Style for each related product card */
+.related-products {
+    flex: 1 1 22%; /* Makes sure each card takes up approximately 22% of the width, adjusts based on screen size */
+    box-sizing: border-box;
+}
+
+/* Style for the product card container */
+.product-realated-card {
+    border: 1px solid #ddd; /* Adds a border around the card */
+    border-radius: 8px; /* Rounds the corners */
+    overflow: hidden; /* Ensures image doesn't overflow the card */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effects */
+}
+
+/* Hover effect for the product card */
+.product-realated-card:hover {
+    transform: translateY(-5px); /* Slightly lift the card */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* More pronounced shadow */
+}
+
+/* Style for the product image */
+.related-product-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover; /* Ensures the image covers the area without stretching */
+}
+
+/* Style for the card body */
+.product-related-card-body {
+    padding: 15px; /* Padding inside the card */
+    background-color: #fff; /* Background color for the card body */
+}
+
+/* Style for the product title */
+.product-related-card-body .related-card-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 10px; /* Space between title and other content */
+}
+
+/* Style for the rating */
+.product-related-card-body .related-card-text {
+    font-size: 1rem;
+    color: #f39c12; /* Gold color for the stars */
+    margin-bottom: 10px; /* Space between rating and price */
+}
+
+/* Style for the product price */
+.product-related-card-body .related-card-text strong {
+    font-size: 1.2rem;
+    color: #27ae60; /* Green color for the price */
+}
+
+</style>
+
+
                 </div>
             </div>
         </main>
@@ -231,7 +291,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <footer class="footer">
                 <div class="container footer-content">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <img src="images/SanrooLogo.png" alt="">
                             <p>Desires to obtain pain of itself, because it is pain, but occasionally circumstances.</p>
                             <div class="social-icons">
@@ -244,11 +304,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <div class="col-md-3">
                             <h5>Explore</h5>
                             <ul class="list-unstyled">
-                                <li><a href="#">About Company</a></li>
-                                <li><a href="#">Meet the Team</a></li>
-                                <li><a href="#">News & Media</a></li>
-                                <li><a href="#">Our Projects</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="index.php">Home</a></li>
+                                <li><a href="services.php">Services</a></li>
+                                <li><a href="shop.php">Shop</a></li>
+                                <li><a href="news.php">News</a></li>
+                                <li><a href="contact.php">Contact</a></li>
                             </ul>
                         </div>
                         <div class="col-md-3">
@@ -256,17 +316,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <p>No. 634, Dikwela Road, Siyabalape.</p>
                             <p><a href="mailto:sanrooprices@gmail.com">sanrooprices@gmail.com</a></p>
                             <p><a href="tel:+94701234567">+94 701234567</a></p>
-                        </div>
-                        <div class="col-md-2">
-                            <h5>Gallery</h5>
-                            <div class="gallery d-flex flex-wrap">
-                                <img src="image1.jpg" alt="Gallery Image">
-                                <img src="image2.jpg" alt="Gallery Image">
-                                <img src="image3.jpg" alt="Gallery Image">
-                                <img src="image4.jpg" alt="Gallery Image">
-                                <img src="image5.jpg" alt="Gallery Image">
-                                <img src="image6.jpg" alt="Gallery Image">
-                            </div>
                         </div>
                     </div>
                 </div>

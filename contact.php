@@ -1,3 +1,61 @@
+<?php
+include 'config.php';
+session_start(); // Start the session
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Sanitize and validate form data
+    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+    $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
+    $subject = filter_input(INPUT_POST, 'subject', FILTER_SANITIZE_STRING);
+    $phone = filter_input(INPUT_POST, 'phone', FILTER_SANITIZE_STRING);
+    $message = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
+
+    // Check if all required fields are filled
+    if (!empty($name) && !empty($email) && !empty($subject) && !empty($phone) && !empty($message)) {
+        try {
+            // Select the collection from the database
+            $collection = $database->CustomerServiceContact;
+
+            // Prepare the document to insert
+            $document = [
+                'name' => $name,
+                'email' => $email,
+                'subject' => $subject,
+                'phone' => $phone,
+                'message' => $message,
+                'contactStatus' => 'Pending' // Default value
+            ];
+
+            // Insert the document into the collection
+            $result = $collection->insertOne($document);
+
+            // Check if the document was successfully inserted
+            if ($result->getInsertedCount() == 1) {
+                
+                echo '<script>
+                alert("Message sent successfully!");
+                window.location.href = "contact.php";
+            </script>';
+
+
+            } else {
+                echo '<script>
+                alert("Message sent Unsuccessfully!");
+                window.location.href = "contact.php";
+            </script>';
+            }
+        } catch (MongoDB\Exception\Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+    } else {
+        echo '<script>
+        alert("All Feilds Are Required");
+        window.location.href = "contact.php";
+    </script>';
+    }
+}
+
+?>
 <!doctype html>
 <html lang="en">
     <head>
@@ -38,28 +96,32 @@
                     <!-- Navbar Links -->
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav mx-auto">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
-                            <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
-                            <li class="nav-item"><a class="nav-link" href="news.html">News</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                            <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                            <li class="nav-item"><a class="nav-link" href="index.php">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="services.php">Services</a></li>
+                            <li class="nav-item"><a class="nav-link" href="shop.php">Shop</a></li>
+                            <li class="nav-item"><a class="nav-link" href="news.php">News</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contact.php">Contact</a></li>
                         </ul>
-            
-                        <!-- Login Button -->
-                        <a href="customerlogin.html" class="btn btn-success me-3">Login</a>
-            
-                        <!-- Profile Dropdown -->
-                        <div class="dropdown">
-                            <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile">
-                            <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="#">Profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
-                            </ul>
-                        </div>
+    
+                        <!-- Conditionally show Login or Profile based on session -->
+                        <?php if (isset($_SESSION['user_name'])): ?>
+                            <!-- Profile Dropdown -->
+                            <div class="dropdown">
+                                <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile" />
+                                <ul class="dropdown-menu dropdown-menu-end">
+                                    <li><a class="dropdown-item" href="customer dashboard/dashboard_orders.php">Orders</a></li>
+                                    <li><a class="dropdown-item" href="customer dashboard/dashboard_maintenance.php">Maintenance</a></li>
+                                    <li><a class="dropdown-item" href="customer dashboard/dashboard_user.php">User</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                    <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                                </ul>
+                            </div>
+                        <?php else: ?>
+                            <!-- Login Button -->
+                            <a href="customerlogin.php" class="btn btn-success me-3">Login</a>
+                        <?php endif; ?>
                     </div>
+                </div>
                 </div>
             </nav>
             <div class="container-fluid">
@@ -74,36 +136,32 @@
                         <div class="col-lg-6 col-sm-6 col-md-6">
                             <h4 style="color: #4AAB3D;">Feel Free To Write</h4>
                             <h1>Send Us An Email</h1>
-                            <form>
-                                <!-- First Row: Name and Email -->
+                            <form method="POST" action="">
                                 <div class="form-row d-flex flex-row gap-2 my-5">
                                     <div class="form-group col-6 col-md-6">
-                                        <input type="text" class="form-control" id="inputName" placeholder="Enter Your Name">
+                                        <input type="text" class="form-control" id="inputName" name="name" placeholder="Enter Your Name" required>
                                     </div>
                                     <div class="form-group col-6 col-md-6">
-                                        <input type="email" class="form-control" id="inputEmail" placeholder="Enter Email">
+                                        <input type="email" class="form-control" id="inputEmail" name="email" placeholder="Enter Email" required>
                                     </div>
                                 </div>
-                        
-                                <!-- Second Row: Subject and Phone -->
+
                                 <div class="form-row d-flex flex-row gap-2 my-5">
                                     <div class="form-group col-6 col-md-6">
-                                        <input type="text" class="form-control" id="inputSubject" placeholder="Enter Subject">
+                                        <input type="text" class="form-control" id="inputSubject" name="subject" placeholder="Enter Subject" required>
                                     </div>
                                     <div class="form-group col-6 col-md-6">
-                                        <input type="tel" class="form-control" id="inputTel" placeholder="Enter Phone">
+                                        <input type="tel" class="form-control" id="inputTel" name="phone" placeholder="Enter Phone" required>
                                     </div>
                                 </div>
-                        
-                                <!-- Message Box -->
+
                                 <div class="form-group my-5">
-                                    <textarea class="form-control" id="inputMessage" rows="7" placeholder="Enter Message"></textarea>
+                                    <textarea class="form-control" id="inputMessage" name="message" rows="7" placeholder="Enter Message" required></textarea>
                                 </div>
-                        
-                                <!-- Submit Button -->
+
                                 <div class="d-flex gap-3 my-5">
                                     <button type="submit" class="btn rounded-5 px-3 py-2" style="background-color: #000; color: white">Send Message</button>
-                                    <button type="submit" class="btn rounded-5 px-4 py-2" style="background-color: #EF5C72; color: white">Reset</button>
+                                    <button type="button" class="btn rounded-5 px-4 py-2" onclick="resetForm()" style="background-color: #EF5C72; color: white">Reset</button>
                                 </div>
                             </form>
                         </div>
@@ -173,11 +231,11 @@
                         <div class="col-md-3">
                             <h5>Explore</h5>
                             <ul class="list-unstyled">
-                                <li><a href="#">About Company</a></li>
-                                <li><a href="#">Meet the Team</a></li>
-                                <li><a href="#">News & Media</a></li>
-                                <li><a href="#">Our Projects</a></li>
-                                <li><a href="#">Contact</a></li>
+                                <li><a href="index.php">Home</a></li>
+                                <li><a href="services.php">Services</a></li>
+                                <li><a href="shop.php">Shop</a></li>
+                                <li><a href="news.php">News</a></li>
+                                <li><a href="contact.php">Contact</a></li>
                             </ul>
                         </div>
                         <div class="col-md-3">
@@ -186,21 +244,15 @@
                             <p><a href="mailto:sanrooprices@gmail.com">sanrooprices@gmail.com</a></p>
                             <p><a href="tel:+94701234567">+94 701234567</a></p>
                         </div>
-                        <div class="col-md-2">
-                            <h5>Gallery</h5>
-                            <div class="gallery d-flex flex-wrap">
-                                <img src="image1.jpg" alt="Gallery Image">
-                                <img src="image2.jpg" alt="Gallery Image">
-                                <img src="image3.jpg" alt="Gallery Image">
-                                <img src="image4.jpg" alt="Gallery Image">
-                                <img src="image5.jpg" alt="Gallery Image">
-                                <img src="image6.jpg" alt="Gallery Image">
-                            </div>
-                        </div>
                     </div>
                 </div>
             </footer>
         </footer>
+        <script>
+            function resetForm() {
+            document.querySelector("form").reset();
+}
+        </script>
         <!-- Bootstrap JavaScript Libraries -->
         <script
             src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
