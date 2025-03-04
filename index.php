@@ -7,7 +7,7 @@ session_start(); // Start the session
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>Home</title>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
@@ -80,22 +80,19 @@ session_start(); // Start the session
                     <div class="col-md-4">
                         <div class="card features-card py-5 px-3">
                             <div class="icon py-5"><i class='bx bx-dollar'></i></div>
-                            <h5 class="mt-3">Environmentally Conscious</h5>
-                            <p>Sample text here</p>
+                            <h5 class="mt-3">Cost Savings</h5>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card features-card py-5 px-3">
                             <div class="icon py-5"><i class='bx bxs-cog' ></i></div>
-                            <h5 class="mt-3">Simple Setup Process</h5>
-                            <p>Sample text here</p>
+                            <h5 class="mt-3">Sustainable Energy Source</h5>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="card features-card py-5 px-3">
                             <div class="icon py-5"><i class='bx bx-sort-up'></i></div>
-                            <h5 class="mt-3">Minimum Upkeep Required</h5>
-                            <p>Sample text here</p>
+                            <h5 class="mt-3">Increase Property Value</h5>
                         </div>
                     </div>
                 </div>
@@ -119,24 +116,24 @@ session_start(); // Start the session
                         <!-- Text Content -->
                         <div class="col-md-6">
                             <h4 class="fw-bold">ABOUT OUR COMPANY</h4>
-                            <h2 class="fw-bold">Our goal is to ensure solar energy accessibility.</h2>
+                            <h2 class="fw-bold">Empowering a Sustainable Future with Solar Energy</h2>
                             <p class="text-muted">
-                                Solar Energy is a powerful way of life, not just a profession. We believe that a smart-looking website is the first impression on visitors.
+                            Solar energy is more than just a technology—it's our passion. At [Your Company Name], we are committed to making clean and renewable energy accessible to everyone. Our goal is to provide high-quality solar solutions that help homeowners, businesses, and industries reduce their carbon footprint while saving on energy costs.
                             </p>
             
                             <!-- Features -->
                             <div class="d-flex align-items-start mb-3">
                                 <span class="me-3 text-success fs-4"><i class='bx bx-sun' ></i></span>
                                 <div>
-                                    <h5 class="fw-bold">Capacity in Place</h5>
-                                    <p class="text-muted mb-0">We've designed a culture that allows our stewards to assimilate.</p>
+                                    <h5 class="fw-bold">Reliable Solar Solutions</h5>
+                                    <p class="text-muted mb-0">We design and deliver cutting-edge solar technology to meet diverse energy needs.</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-start mb-3">
                                 <span class="me-3 text-success fs-4"><i class='bx bx-world' ></i></span>
                                 <div>
                                     <h5 class="fw-bold">Preserve the Planet</h5>
-                                    <p class="text-muted mb-0">We've designed a culture that allows our stewards to assimilate.</p>
+                                    <p class="text-muted mb-0">Every solar panel installed contributes to a cleaner, greener planet.</p>
                                 </div>
                             </div>
             
@@ -150,7 +147,7 @@ session_start(); // Start the session
                 <div class="container">
                     <div class="row text-center">
                         <h4>Services We Are Offering</h4>
-                        <h1>Higt Quality Products And Services <br> We Stand Behind</h1>
+                        <h1>Premium Solar Solutions & Expert<br>Services You Can Trust</h1>
                     </div>
                     <div class="row mt-5">
                         <div class="col-md-4">
@@ -158,7 +155,7 @@ session_start(); // Start the session
                                 <img src="/images/services-1.png" class="card-img-top" alt="Solar Panel">
                                 <div class="card-body text-center services-body">
                                     <h5 class="card-title">Solar Panel Solutions</h5>
-                                    <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
+                                    <p class="card-text">High-performance solar panels designed to maximize energy production and efficiency for residential, commercial, and industrial use.</p>
                                     <a href="#" class="btn btn-link text-decoration-none text-dark">READ MORE →</a>
                                 </div>
                             </div>
@@ -168,8 +165,8 @@ session_start(); // Start the session
                             <div class="card services-card border shadow-lg">
                                 <img src="images/service-2.png" class="card-img-top" alt="Solar Panel">
                                 <div class="card-body text-center services-body">
-                                    <h5 class="card-title">Solar Panel Solutions</h5>
-                                    <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
+                                    <h5 class="card-title">Installation</h5>
+                                    <p class="card-text">Expert solar panel installation services with a seamless and hassle-free process, ensuring maximum energy output and long-term reliability.</p>
                                     <a href="#" class="btn btn-link text-decoration-none text-dark">READ MORE →</a>
                                 </div>
                             </div>
@@ -179,8 +176,8 @@ session_start(); // Start the session
                             <div class="card services-card border shadow-lg">
                                 <img src="images/service-3.jpg" class="card-img-top" alt="Solar Panel">
                                 <div class="card-body text-center services-body">
-                                    <h5 class="card-title">Solar Panel Solutions</h5>
-                                    <p class="card-text">We've designed a culture that allows our team to assimilate.</p>
+                                    <h5 class="card-title">Energy Storage Solutions</h5>
+                                    <p class="card-text">Advanced battery storage solutions to help you store excess solar energy for use during nighttime or power outages, ensuring energy independence.</p>
                                     <a href="#" class="btn btn-link text-decoration-none text-dark">READ MORE →</a>
                                 </div>
                             </div>
@@ -194,13 +191,13 @@ session_start(); // Start the session
                         <!-- Left Content -->
                         <div class="col-md-6 why-text">
                             <h4 class="text-success text-uppercase">Why Choose Us</h4>
-                            <h2>Our mission is to provide widespread access.</h2>
-                            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                            <h2>Empowering a Sustainable Future with Reliable Solar Solutions</h2>
+                            <p>We are committed to providing high-quality solar energy solutions that make renewable power accessible to everyone. With cutting-edge technology and expert services, we ensure that every installation delivers maximum efficiency and long-term benefits.</p>
                             <p><strong> <i class='bx bx-bulb'></i> We're doing the right thing solar business. The right way.</strong></p>
                             <ul class="why-list">
-                                <li><i class='bx bxs-check-circle' ></i>Mounting System for Ground Installation</li>
-                                <li><i class='bx bxs-check-circle' ></i>Making this the first true generator on the Internet</li>
-                                <li><i class='bx bxs-check-circle' ></i>Various versions have evolved over the years</li>
+                                <li><i class='bx bxs-check-circle' ></i> Sustainable & Cost-Effective Solutions</li>
+                                <li><i class='bx bxs-check-circle' ></i> Expert Installation & Support</li>
+                                <li><i class='bx bxs-check-circle' ></i> Advanced Solar Technology</li>
                             </ul>
                         </div>
             
@@ -220,7 +217,7 @@ session_start(); // Start the session
 
             <section class="planning">
                 <div class="hero-content">
-                    <h1>Planning for Wind and Solar Energy Project</h1>
+                    <h1>Planning for Energy Project</h1>
                     <a href="#" class="btn mt-5 py-2 px-4" style="background: #4AAB3D; color: #fff;">Discover More</a>
                 </div>
             </section>
@@ -406,7 +403,7 @@ session_start(); // Start the session
                                         </h2>
                                         <div id="faq1" class="accordion-collapse collapse show">
                                             <div class="accordion-body">
-                                                There are many variations of passages, the majority have suffered alteration in some form.
+                                            Solar panels absorb sunlight and convert it into electricity using photovoltaic cells. This electricity can power your home or business, reducing your reliance on the grid.
                                             </div>
                                         </div>
                                     </div>

@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Display the success message and redirect to the maintenance dashboard
         echo "<script>
                 alert('Maintenance Added Successfully! ID: " . $newMaintenanceId . "');
-                window.location.href = 'http://localhost/project/finalproject/SanrooLK-Website/customer%20dashboard/dashboard_maintenance.php';
+                window.location.href = 'http://localhost/project/finalproject/SanrooLK-Website/customer%20dashboard/dashboard_inquiry.php';
               </script>";
     } catch (Exception $e) {
         echo "Error adding maintenance: " . $e->getMessage();
@@ -397,7 +397,7 @@ echo "$newId";
             <footer class="sticky-footer bg-white mt-5">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
+                        <span>Copyright &copy; by SanrooLK</span>
                     </div>
                 </div>
             </footer>
