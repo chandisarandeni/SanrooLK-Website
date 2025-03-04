@@ -129,7 +129,7 @@ session_start(); // Start the session
                     <!-- Card 1 -->
                     <div class="col-md-4">
                         <div class="card services-card">
-                            <img src="/images/services-1.png" class="card-img-top service-card-image" alt="Solar Panel">
+                            <img src="images/services-1.png" class="card-img-top service-card-image" alt="Solar Panel">
                             <div class="card-body text-center">
                                 <h5 class="card-title">Solar Panel Solutions</h5>
                                 <p class="card-text">We've designed a culture that allows our team to assimilate.</p>

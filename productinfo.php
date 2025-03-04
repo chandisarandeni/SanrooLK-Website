@@ -129,6 +129,7 @@ $relatedProducts = $database->Product->find([], ['limit' => 4]);
                             <img src="images/profile-pic.jpg" class="profile-pic dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" alt="Profile" />
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="customer dashboard/dashboard_orders.php">Orders</a></li>
+                                <li><a class="dropdown-item" href="customer dashboard/dashboard_inquiry.php">Inquiry</a></li>
                                 <li><a class="dropdown-item" href="customer dashboard/dashboard_maintenance.html">Maintenance</a></li>
                                 <li><a class="dropdown-item" href="customer dashboard/dashboard_user.php">User</a></li>
                                 <li><hr class="dropdown-divider" /></li>
